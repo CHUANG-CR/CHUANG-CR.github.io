@@ -20,7 +20,7 @@ body {
     padding: 0;
     
     /* === 新增的背景圖片設定 === */
-    background-image: url('background.jpg'); /* 記得換成你的照片檔名 */
+    background-image: url('images/background.jpg'); /* 記得換成你的照片檔名 */
     background-size: cover;      /* 關鍵：讓照片自動等比例縮放，填滿整個螢幕 */
     background-position: center; /* 讓照片永遠保持置中對齊 */
     background-repeat: no-repeat;/* 防止照片不夠大時變成磁磚般的重複拼貼 */
