@@ -14,11 +14,18 @@
 
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "微軟正黑體", sans-serif;
-    background-color: var(--bg-color);
     color: var(--text-main);
     line-height: 1.6;
     margin: 0;
-    padding: 0; /* 為了讓導覽列貼齊邊緣，將預設 padding 歸零 */
+    padding: 0;
+    
+    /* === 新增的背景圖片設定 === */
+    background-image: url('background.jpg'); /* 記得換成你的照片檔名 */
+    background-size: cover;      /* 關鍵：讓照片自動等比例縮放，填滿整個螢幕 */
+    background-position: center; /* 讓照片永遠保持置中對齊 */
+    background-repeat: no-repeat;/* 防止照片不夠大時變成磁磚般的重複拼貼 */
+    background-attachment: fixed;/* 質感秘訣：背景固定！往下捲動網頁時，照片不會跟著跑 */
+}
 }
 
 a {
