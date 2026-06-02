@@ -1,426 +1,419 @@
-/* ==================== CSS 變數 (主題顏色) ==================== */
+
 :root {
-    --primary-color: #FF6B6B;        /* 主要色 - 紅色 */
-    --secondary-color: #4ECDC4;      /* 次要色 - 青綠色 */
-    --accent-color: #FFE66D;         /* 強調色 - 黃色 */
-    --dark-bg: #2C3E50;              /* 深色背景 */
-    --light-bg: #F8F9FA;             /* 淺色背景 */
-    --text-dark: #2C3E50;            /* 深色文字 */
-    --text-light: #FFFFFF;           /* 淺色文字 */
-    --border-color: #E1E8ED;         /* 邊框色 */
-    --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    --shadow-hover: 0 8px 20px rgba(0, 0, 0, 0.15);
+    --primary-color: #1a365d;    /* 質感深藏青（日系主色調） */
+    --accent-color: #e28743;     /* 溫暖橘（重點高亮、按鈕） */
+    --bg-color: #f7fafc;         /* 極輕柔灰米背景 */
+    --card-bg: #ffffff;          /* 純白卡片背景 */
+    --text-color: #2d3748;       /* 主內文字色 */
+    --text-muted: #718096;      /* 次要、提示字色 */
+    --border-color: #e2e8f0;    /* 輕薄邊框線 */
+    --nav-bg: rgba(26, 54, 93, 0.92); /* 導覽列毛玻璃基底 */
 }
 
-/* ==================== 通用樣式 ==================== */
 * {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif, 'Microsoft YaHei', '微软雅黑', 'Arial Unicode MS';
-    line-height: 1.6;
-    color: var(--text-dark);
-    background-color: var(--light-bg);
 }
 
 html {
-    scroll-behavior: smooth;
+    scroll-behavior: smooth; /* 點擊導覽列時會平滑滾動 */
+    font-family: 'Noto Sans TC', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
-/* ==================== 容器與佈局 ==================== */
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    padding-top: 70px; /* 留出空間給固定在頂部的導覽列 */
+}
+
+/* 所有的超連結基礎樣式 */
+a {
+    color: #2b6cb0;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+a:hover {
+    color: var(--accent-color);
+    text-decoration: underline;
+}
+
+/* ==================== 頂部導覽列 Navbar ==================== */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 70px;
+    background-color: var(--nav-bg);
+    backdrop-filter: blur(10px); /* 現代毛玻璃模糊效果 */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.nav-container {
+    max-width: 1200px;
+    height: 100%;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-logo {
+    color: #ffffff !important;
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+.nav-logo:hover {
+    text-decoration: none;
+}
+
+.nav-menu {
+    list-style: none;
+    display: flex;
+    gap: 15px;
+}
+
+.nav-menu a {
+    color: #e2e8f0 !important;
+    font-size: 0.95rem;
+    font-weight: 500;
+    padding: 8px 12px;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+
+.nav-menu a:hover {
+    color: #ffffff !important;
+    background-color: rgba(255, 255, 255, 0.15);
+    text-decoration: none;
+}
+
+/* ==================== 主要佈局 Container ==================== */
 .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 40px 20px;
 }
 
-/* ==================== 標題樣式 ==================== */
-h1 {
-    font-size: 2.5rem;
-    color: var(--primary-color);
-    margin: 40px 0 30px 0;
-    text-align: center;
-    font-weight: 700;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-    border-bottom: 3px solid var(--secondary-color);
-    padding-bottom: 15px;
+.main-section {
+    padding-top: 40px;
+    margin-bottom: 60px;
 }
 
-h2 {
+/* 區塊大標題 */
+.section-title {
     font-size: 1.8rem;
-    color: var(--dark-bg);
-    margin: 20px 0 15px 0;
-    font-weight: 600;
-}
-
-h3 {
-    font-size: 1.3rem;
-    color: var(--text-dark);
-    margin: 15px 0 10px 0;
-    font-weight: 600;
-}
-
-/* ==================== 連結樣式 ==================== */
-a {
     color: var(--primary-color);
-    text-decoration: none;
-    transition: all 0.3s ease;
+    border-bottom: 3px solid var(--primary-color);
+    padding-bottom: 10px;
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.section-title span {
+    font-size: 2rem;
 }
 
-a:hover {
-    color: var(--secondary-color);
-    text-decoration: underline;
-}
-
-/* ==================== 網格卡片容器 ==================== */
+/* ==================== 飯店/美食篇卡片設計 (Grid & Cards) ==================== */
 .grid-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); /* 自動適應欄數 */
     gap: 25px;
-    margin: 30px 0;
 }
 
-/* ==================== 卡片樣式 ==================== */
 .card {
-    background: white;
+    background-color: var(--card-bg);
     border-radius: 12px;
-    padding: 25px;
-    box-shadow: var(--shadow);
-    transition: all 0.3s ease;
-    border-left: 5px solid var(--primary-color);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+    border: 1px solid var(--border-color);
     overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .card:hover {
-    box-shadow: var(--shadow-hover);
-    transform: translateY(-8px);
-    border-left-color: var(--secondary-color);
+    transform: translateY(-5px); /* 滑鼠懸停微幅升起效果 */
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
 }
 
-.card h2 {
+.card-header {
+    background: linear-gradient(135deg, #2b4c7e, var(--primary-color));
+    padding: 20px;
+    color: #ffffff;
+}
+
+.card-header h2 a {
+    color: #ffffff !important;
+    font-size: 1.3rem;
+    font-weight: 700;
+}
+
+.card-header .phone {
+    display: block;
+    font-size: 0.85rem;
+    margin-top: 5px;
+    opacity: 0.85;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+.card-body h3 {
+    font-size: 1rem;
     color: var(--primary-color);
-    margin-bottom: 20px;
-    padding-bottom: 10px;
-    border-bottom: 2px solid var(--accent-color);
+    margin-top: 15px;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    border-left: 3px solid var(--accent-color);
+    padding-left: 8px;
+}
+.card-body h3:first-of-type {
+    margin-top: 0;
 }
 
-.card h3 {
-    color: var(--secondary-color);
-    margin-top: 18px;
-    margin-bottom: 12px;
-    font-size: 1.1rem;
-}
-
-.card ul {
+.card-body ul {
     list-style: none;
-    margin: 10px 0;
+    padding-left: 0;
 }
 
-.card li {
-    padding: 8px 0 8px 25px;
-    position: relative;
-    color: var(--text-dark);
-    line-height: 1.8;
+.card-body ul li {
+    font-size: 0.9rem;
+    margin-bottom: 6px;
+    color: var(--text-color);
 }
 
-.card li:before {
-    content: "✓";
-    position: absolute;
-    left: 0;
-    color: var(--secondary-color);
-    font-weight: bold;
+/* 入退房時間小區塊 */
+.time-box {
+    display: flex;
+    justify-content: space-between;
+    background-color: #edf2f7;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    margin: 12px 0;
+}
+
+/* 周邊機能特定樣式 */
+.amenities li a {
+    display: inline-block;
+    background-color: #f0f4f8;
+    color: #4a5568;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-bottom: 4px;
+    font-size: 0.85rem;
+}
+.amenities li a:hover {
+    background-color: var(--accent-color);
+    color: white !important;
+    text-decoration: none;
+}
+
+/* ==================== 交通/購物篇表格與清單優化 ==================== */
+.transport-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    margin-bottom: 30px;
+}
+
+.table-card {
+    background-color: var(--card-bg);
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    padding: 20px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.table-card h3 {
+    color: var(--primary-color);
+    margin-bottom: 15px;
     font-size: 1.1rem;
 }
 
-/* ==================== 表格樣式 ==================== */
 .table-container {
-    overflow-x: auto;
-    margin: 30px 0;
-    border-radius: 8px;
-    box-shadow: var(--shadow);
+    width: 100%;
+    overflow-x: auto; /* 支援手機版橫向捲動 */
 }
 
 table {
     width: 100%;
     border-collapse: collapse;
-    background: white;
+    font-size: 0.95rem;
 }
 
-thead {
-    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-    color: white;
+th, td {
+    padding: 10px 12px;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
 }
 
 th {
-    padding: 18px;
-    text-align: left;
-    font-weight: 600;
-    font-size: 1.05rem;
+    background-color: #f8fafc;
+    color: var(--primary-color);
+    font-weight: 700;
 }
 
-td {
-    padding: 16px 18px;
-    border-bottom: 1px solid var(--border-color);
-    color: var(--text-dark);
+tr:hover {
+    background-color: #f8fafc; /* 滑鼠移過去行變色 */
 }
 
-tbody tr {
-    transition: background-color 0.2s ease;
+/* 地鐵線的彩色徽章外觀 */
+.badge {
+    display: inline-block;
+    padding: 4px 10px;
+    color: white;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-tbody tr:hover {
-    background-color: rgba(255, 107, 107, 0.05);
+/* 地鐵英文代號圓形外觀 */
+.line-code, .line-code-btn {
+    display: inline-block;
+    width: 26px;
+    height: 26px;
+    line-height: 24px;
+    border: 2px solid currentColor;
+    border-radius: 50%;
+    text-align: center;
+    font-weight: bold;
+    font-size: 0.85rem;
+}
+.line-code-btn {
+    color: #4a5568;
+    transition: all 0.2s ease;
+}
+.line-code-btn:hover {
+    background-color: var(--primary-color);
+    color: white !important;
+    border-color: var(--primary-color);
+    text-decoration: none;
 }
 
-tbody tr:last-child td {
-    border-bottom: none;
+/* 交通票卡資訊方塊 */
+.info-box {
+    background-color: #ebf8ff;
+    border-left: 4px solid #3182ce;
+    padding: 20px;
+    border-radius: 0 12px 12px 0;
+    margin-top: 30px;
 }
 
-/* ==================== 資訊列表 ==================== */
+.info-box h3 {
+    color: #2b6cb0;
+    margin-bottom: 15px;
+}
+
 .info-list {
-    list-style: none;
-    background: white;
-    padding: 25px;
-    border-radius: 8px;
-    box-shadow: var(--shadow);
-    margin: 25px 0;
+    list-style-type: none;
+    padding-left: 0;
 }
 
 .info-list li {
-    padding: 15px 0 15px 40px;
     position: relative;
-    border-bottom: 1px solid var(--border-color);
-    color: var(--text-dark);
-    line-height: 1.8;
+    padding-left: 20px;
+    margin-bottom: 12px;
+    font-size: 0.95rem;
 }
 
-.info-list li:last-child {
-    border-bottom: none;
-}
-
-.info-list li:before {
-    content: "🎫";
+.info-list li::before {
+    content: "✓";
     position: absolute;
     left: 0;
-    font-size: 1.3rem;
+    color: #3182ce;
+    font-weight: bold;
 }
 
-.info-list strong {
-    color: var(--primary-color);
-    font-weight: 600;
+/* ==================== 景點篇膠囊標籤 (Tags Layout) ==================== */
+.spots-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
 }
 
-/* ==================== 區域分組 (景點篇) ==================== */
 .region-section {
-    background: white;
-    padding: 25px;
-    margin: 25px 0;
-    border-radius: 8px;
-    box-shadow: var(--shadow);
-    border-left: 5px solid var(--secondary-color);
+    background-color: var(--card-bg);
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
 }
 
 .region-section h3 {
     color: var(--primary-color);
+    font-size: 1.1rem;
     margin-bottom: 15px;
-    padding-bottom: 10px;
-    border-bottom: 2px solid var(--accent-color);
 }
 
 .tags {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: wrap; /* 超出寬度自動換行 */
     gap: 12px;
-    margin-top: 15px;
 }
 
+/* 膠囊標籤按鈕樣式 */
 .tags a {
-    display: inline-block;
-    padding: 10px 16px;
-    background: linear-gradient(135deg, rgba(255, 107, 107, 0.1), rgba(78, 205, 196, 0.1));
-    border: 2px solid var(--primary-color);
-    border-radius: 25px;
-    color: var(--primary-color);
+    background-color: #fff;
+    color: #4a5568 !important;
+    border: 1px solid #cbd5e0;
+    padding: 8px 16px;
+    border-radius: 30px;
+    font-size: 0.9rem;
     font-weight: 500;
-    transition: all 0.3s ease;
-    text-decoration: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+    transition: all 0.2s ease;
 }
 
 .tags a:hover {
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-    color: white;
-    transform: translateY(-3px);
-    box-shadow: 0 4px 12px rgba(255, 107, 107, 0.3);
+    background-color: var(--primary-color);
+    color: #ffffff !important;
+    border-color: var(--primary-color);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     text-decoration: none;
 }
 
-/* ==================== 響應式設計 ==================== */
+/* ==================== 頁尾樣式 Footer ==================== */
+.footer {
+    text-align: center;
+    padding: 40px 20px;
+    background-color: var(--primary-color);
+    color: #a0aec0;
+    font-size: 0.9rem;
+    margin-top: 40px;
+}
+
+/* ==================== RWD 手機版響應式額外調整 ==================== */
 @media (max-width: 768px) {
-    h1 {
-        font-size: 2rem;
-        margin: 30px 0 20px 0;
+    body {
+        padding-top: 60px;
     }
-
-    h2 {
-        font-size: 1.5rem;
+    .navbar {
+        height: 60px;
     }
-
-    h3 {
-        font-size: 1.1rem;
+    .nav-container {
+        padding: 0 15px;
     }
-
-    .container {
-        padding: 25px 15px;
-    }
-
-    .grid-container {
-        grid-template-columns: 1fr;
-        gap: 20px;
-    }
-
-    .card {
-        padding: 20px;
-    }
-
-    .card h2 {
-        font-size: 1.5rem;
-    }
-
-    .card h3 {
+    .nav-logo {
         font-size: 1rem;
     }
-
-    table {
-        font-size: 0.9rem;
+    .nav-menu {
+        display: none; /* 在手機版可以進一步實作漢堡選單，此處先做基礎收納或靠滑動 */
     }
-
-    th, td {
-        padding: 12px;
-    }
-
-    .tags {
-        gap: 8px;
-    }
-
-    .tags a {
-        padding: 8px 14px;
-        font-size: 0.9rem;
-    }
-
-    .info-list {
-        padding: 20px;
-    }
-
-    .info-list li {
-        padding: 12px 0 12px 35px;
-    }
-}
-
-@media (max-width: 480px) {
-    h1 {
-        font-size: 1.6rem;
-        margin: 20px 0 15px 0;
-    }
-
-    h2 {
-        font-size: 1.3rem;
-    }
-
-    .container {
-        padding: 15px 10px;
-    }
-
     .grid-container {
-        gap: 15px;
+        grid-template-columns: 1fr; /* 手機版飯店卡片全寬單欄 */
     }
-
-    .card {
-        padding: 15px;
-        border-left: 3px solid var(--primary-color);
-    }
-
-    .card h2 {
-        font-size: 1.2rem;
-    }
-
-    .tags a {
-        padding: 6px 12px;
-        font-size: 0.85rem;
-    }
-
-    .table-container {
-        margin: 20px 0;
-    }
-
-    th, td {
-        padding: 10px 8px;
-        font-size: 0.85rem;
-    }
-}
-
-/* ==================== 列印樣式 ==================== */
-@media print {
-    body {
-        background: white;
-    }
-
-    .card {
-        break-inside: avoid;
-        page-break-inside: avoid;
-    }
-
-    a {
-        color: var(--primary-color);
-    }
-
-    .shadow,
-    .card {
-        box-shadow: none;
-        border: 1px solid var(--border-color);
-    }
-}
-
-/* ==================== 動畫效果 ==================== */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.card {
-    animation: fadeIn 0.5s ease-out;
-}
-
-/* ==================== 無障礙設計 ==================== */
-a:focus,
-button:focus {
-    outline: 3px solid var(--primary-color);
-    outline-offset: 2px;
-}
-
-/* ==================== 深色模式支援 (未來擴展) ==================== */
-@media (prefers-color-scheme: dark) {
-    :root {
-        --light-bg: #1E1E1E;
-        --text-dark: #E8E8E8;
-    }
-
-    body {
-        background-color: var(--light-bg);
-    }
-
-    .card,
-    .table-container table,
-    .info-list,
-    .region-section {
-        background: #2D2D2D;
+    .section-title {
+        font-size: 1.4rem;
     }
 }
