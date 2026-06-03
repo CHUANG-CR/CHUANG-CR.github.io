@@ -1,3 +1,58 @@
-h1{
-  color:black;
+* {
+    margin: 0; /* 移除所有元素的外邊距 */
+    padding: 0; /* 移除所有元素的內邊距 */
+    box-sizing: border-box; /* 設定盒模型為border-box，讓padding和border不會影響元素的總寬度和高度 */
+}
+header{
+    position: relative; /* 設定標頭位置為相對定位，以便子元素使用絕對定位 */
+    height: 80px; /* 設定標頭的高度 */
+    background-color: #0b73e1; /* 設定標頭的背景顏色為0b73e1色 */
+}
+
+header ul{
+    position: absolute; /* 設定導航列表位置為絕對定位 */
+    right: 5vw; /* 設定導航列表距離頁首右邊的距離 */
+    top:0; /* 設定導航列表距離頁首頂部的距離 */
+    line-height: 80px; /* 設定導航列表項目的行高，使其垂直居中 */
+}
+header a{
+    line-height: 80px; /* 設定標題的行高，使其垂直居中 */
+    color: #000000; /* 設定導航連結顏色為海綠色 */
+    text-decoration: none; /* 移除導航連結的下劃線 */
+    font-family: '微軟正黑體', 'Microsoft YaHei', sans-serif; /* 設定導航連結字體為微軟正黑體，備用字體為Arial和sans-serif */
+}
+header a:hover{
+    color: #fe0000; /* 設定導航連結懸停時的顏色為亮海綠色 */
+}
+header li{
+    display: inline-block; /* 將導航列表項目設置為行內塊元素，使其水平排列 */
+    margin-right: 4vw; /* 設定導航列表項目之間的右邊距 */
+}
+.taiwan, .china, .japan{
+    display: flex; /* 設定圖片區域為彈性容器 */
+    background-color: #ffffff; /* 設定圖片區域的背景顏色為白色 */
+    /* --- 新增的對齊語法 --- */
+    justify-content: center; /* 讓內部的 div 在水平方向置中對齊 */
+    align-items: center; /* 讓內部的 div 在垂直方向置中對齊 (若圖片高度不同時很有用) */
+    gap: 30px; /* 設定每個 div 之間的距離為 30px */
+}
+
+.taiwan div, .china div, .japan div{
+    width: 300px; /* 設定圖片區域的寬度 */
+    text-align: center; /* 將圖片區域的文字置中對齊 */
+}
+.taiwan img, .china img, .japan img{
+    width: 100%; /* 寬度依然跟隨父元素 */
+    aspect-ratio: 4 / 3; /* 強制設定一個統一的長寬比，例如 4:3 或 16:9 或 1:1 */
+    object-fit: cover; /* 這是魔法！讓圖片填滿空間但不變形，多餘的部分會被自動裁切 */
+    border-radius: 10px; /* 維持你的圓角設定 */
+}
+
+.motto{
+    background-color: #0b73e1; /* 設定座右銘區域的背景顏色為淡青色 */
+    color: #000000; /* 設定座右銘文字顏色為黑色 */
+    font-size: 24px; /* 設定座右銘文字的字體大小 */
+    text-align: center; /* 將座右銘文字置中對齊 */
+    padding: 10px 0; /* 設定座右銘區域的上下內邊距 */
+    font-family: '微軟正黑體', 'Microsoft YaHei', sans-serif; /* 設定座右銘文字的字體為微軟正黑體，備用字體為Arial和sans-serif */
 }
