@@ -392,24 +392,50 @@ tr:hover {
     font-size: 0.9rem;
     margin-top: 40px;
 }
-
 /* ==================== RWD 手機版響應式額外調整 ==================== */
 @media (max-width: 768px) {
     body {
-        padding-top: 60px;
+        /* 因為導覽列變成上下兩排變高了，需要增加網頁頂部的預留空間以免遮擋內容 */
+        padding-top: 100px; 
     }
     .navbar {
-        height: 60px;
+        height: auto; /* 取消原本的固定 60px 高度，讓內容自動撐開 */
+        padding: 12px 0;
     }
     .nav-container {
         padding: 0 15px;
+        flex-direction: column; /* 讓 Logo 和選單變成上下排列 */
+        align-items: flex-start;
+        gap: 12px;
     }
     .nav-logo {
         font-size: 1rem;
     }
     .nav-menu {
-        display: none; /* 在手機版可以進一步實作漢堡選單，此處先做基礎收納或靠滑動 */
+        /* 移除原本的 display: none; */
+        display: flex; 
+        width: 100%;
+        overflow-x: auto; /* 開啟下方橫向滾動軸 */
+        padding-bottom: 8px; /* 稍微留白，避免滾動軸貼著文字 */
+        -webkit-overflow-scrolling: touch; /* 讓手機/平版觸控滑動更順暢 */
     }
+    .nav-menu a {
+        white-space: nowrap; /* 非常重要：強制選單文字不換行，才會觸發橫向滾動 */
+    }
+    
+    /* 優化：自訂導覽列滾動軸的樣式（讓它在深色背景上較為美觀） */
+    .nav-menu::-webkit-scrollbar {
+        height: 4px;
+    }
+    .nav-menu::-webkit-scrollbar-track {
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 4px;
+    }
+    .nav-menu::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.3);
+        border-radius: 4px;
+    }
+
     .grid-container {
         grid-template-columns: 1fr; /* 手機版飯店卡片全寬單欄 */
     }
