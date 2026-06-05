@@ -2,6 +2,6 @@
 ---
 # 程式碼 
 ### [網站首頁](https://github.com/CHUANG-CR/CHUANG-CR.github.io/blob/main/index.html)
-### [日本東京篇]()
-### [台灣台南篇]()
-### [中國上海篇]()
+### [台南篇]()
+### [東京篇]()
+### [上海篇]()
