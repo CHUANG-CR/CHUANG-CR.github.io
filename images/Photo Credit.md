@@ -1,0 +1,1 @@
+- 酪梨小圖標 : favicon.ico，來源: https://favicon.io/emoji-favicons/avocado
