@@ -1,1 +1,2 @@
 - 酪梨小圖標 : favicon.ico，來源: https://favicon.io/emoji-favicons/avocado
+- 首頁背景 : fuji-mountain.jpg，來源: https://reurl.cc/bdp7Q3

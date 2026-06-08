@@ -1,0 +1,491 @@
+/* ==========================================================================
+   1. 全域重設與變數設定 (Global Reset & Variables)
+   ========================================================================== */
+:root {
+  --primary-color: #0d1b2a; /* 深藏青色 */
+  --secondary-color: #f77f00; /* 溫暖橘色 */
+  --text-dark: #1e293b; /* 深色文字 */
+  --text-light: #f8fafc; /* 淺色文字 */
+  --text-muted: #64748b; /* 灰色次要文字 */
+  --bg-light: #f8f9fa; /* 網頁淺色背景 */
+  --card-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  --hover-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family:
+    "PingFang TC", "Helvetica Neue", "Microsoft JhengHei", sans-serif;
+}
+
+body {
+  background-color: var(--bg-light);
+  color: var(--text-dark);
+  line-height: 1.6;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ===================================================
+   安全防污染版：導覽列與下拉選單樣式
+   =================================================== */
+
+/* 導覽列主容器 */
+.navbar {
+  background-color: #0d1b2a; /* 深藏青色 */
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 5%;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+  overflow: visible !important; /* 允許下拉選單正常溢出顯示 */
+}
+
+.navbar .logo {
+  font-size: 1.25rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+/* 【關鍵：用 > 限制】僅針對第一層的主選單 ul */
+.navbar nav > ul {
+  display: flex; /* 只有第一層橫著排 */
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  align-items: center;
+}
+
+/* 【關鍵：用 > 限制】僅針對第一層的 li */
+.navbar nav > ul > li {
+  position: relative; /* 讓第二層選單以此為定位基準 */
+  margin-left: 25px; /* 只有第一層項目有左邊距 */
+}
+
+/* 【關鍵：用 > 限制】僅針對第一層的文字連結 */
+.navbar nav > ul > li > a {
+  color: #cbd5e1;
+  text-decoration: none;
+  font-size: 1rem;
+  padding: 8px 12px;
+  display: block;
+  transition: color 0.3s;
+}
+
+.navbar nav > ul > li > a:hover,
+.navbar nav > ul > li > a.active {
+  color: #f77f00; /* 溫暖橘色 */
+  font-weight: bold;
+}
+
+/* ===================================================
+   獨立的第二層下拉選單（完全不受上方 flex 與 margin 影響）
+   =================================================== */
+
+/* 下拉選單白色外殼容器 */
+.dropdown-content {
+  display: none; /* 預設隱藏 */
+  position: absolute; /* 絕對定位 */
+  top: 100%; /* 緊貼在母選項下方 */
+  left: 0;
+  background-color: white; /* 下拉選單強制白底 */
+  min-width: 160px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  border-radius: 8px;
+  padding: 8px 0;
+  margin: 0;
+  list-style: none !important;
+  z-index: 9999;
+  flex-direction: column !important; /* 強制重設為直向排列 */
+}
+
+/* 下拉選單內的 li 項目 */
+.dropdown-content > li {
+  margin: 0 !important; /* 歸零，切断第一層 margin-left 的污染 */
+  width: 100%;
+}
+
+/* 下拉選單內的城市文字連結 */
+.dropdown-content > li > a {
+  color: #333333 !important; /* 強制為深灰色字，解決白底白字隱形問題 */
+  padding: 12px 20px !important;
+  font-size: 0.95rem !important;
+  font-weight: normal !important;
+  text-align: left;
+  display: block !important;
+  text-decoration: none !important;
+  white-space: nowrap; /* 防止名字因為選單寬度不夠被擠到換行 */
+  transition:
+    background 0.2s,
+    color 0.2s;
+}
+
+/* ===================================================
+   觸發動態顯示的效果
+   =================================================== */
+
+/* 當滑鼠移入時，下拉選單以 flex 彈出（維持直排） */
+.navbar nav > ul > li.dropdown:hover .dropdown-content {
+  display: flex !important;
+}
+
+/* 滑鼠移入城市選項時的視覺效果 */
+.dropdown-content > li > a:hover {
+  background-color: #f1f5f9 !important; /* 淡淡的滑過灰 */
+  color: #f77f00 !important; /* 字體變橘色 */
+  font-weight: bold !important;
+}
+
+/* ==========================================================================
+   3. 入口首頁專用佈局 (Portal Home Page Components)
+   ========================================================================== */
+/* Hero 主視覺大橫幅 - 圖片背景版 */
+.hero-section {
+  /* 重點：前半段是半透明黑底遮罩，後半段 url() 放你的圖片路徑 */
+  background:
+    linear-gradient(rgba(13, 27, 42, 0.6), rgba(13, 27, 42, 0.8)),
+    url("../images/fuji-mountain.jpg"); /* 替換成你的圖片檔名 */
+
+  background-size: cover; /* 讓圖片自動縮放、完美填滿整個區塊 */
+  background-position: center; /* 讓圖片居中對齊，換螢幕時不歪掉 */
+  background-repeat: no-repeat; /* 防止圖片因為太小而重複拼接 */
+  color: white;
+  text-align: center;
+  padding: 120px 20px; /* 如果想讓橫幅更高，可以把 100px 加大到 120px */
+}
+.hero-content h1 {
+  font-size: 2.8rem;
+  margin-bottom: 20px;
+  letter-spacing: 2px;
+}
+
+.hero-content p {
+  font-size: 1.15rem;
+  margin-bottom: 35px;
+  max-width: 650px;
+  margin-left: auto;
+  margin-right: auto;
+  color: #e2e8f0;
+}
+
+.btn-primary {
+  background-color: var(--secondary-color);
+  color: white;
+  padding: 12px 30px;
+  text-decoration: none;
+  border-radius: 30px;
+  font-weight: bold;
+  font-size: 1rem;
+  transition:
+    background 0.3s,
+    transform 0.2s;
+  display: inline-block;
+  box-shadow: 0 4px 10px rgba(247, 127, 0, 0.3);
+}
+
+.btn-primary:hover {
+  background-color: #d66f00;
+  transform: translateY(-2px);
+}
+
+/* 城市攻略卡片區塊 */
+.portal-container {
+  max-width: 1200px;
+  margin: 60px auto;
+  padding: 0 25px;
+}
+
+.section-title {
+  text-align: center;
+  margin-bottom: 40px;
+  font-size: 2rem;
+  color: var(--primary-color);
+}
+
+.section-title::after {
+  content: "";
+  display: block;
+  width: 50px;
+  height: 4px;
+  background-color: var(--secondary-color);
+  margin: 10px auto 0;
+  border-radius: 2px;
+}
+
+.city-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+}
+
+.city-card {
+  background-color: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--card-shadow);
+  position: relative;
+  transition:
+    transform 0.3s,
+    box-shadow 0.3s;
+  display: flex;
+  flex-direction: column;
+}
+
+.city-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--hover-shadow);
+}
+
+.city-badge {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background-color: var(--secondary-color);
+  color: white;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  z-index: 10;
+}
+
+.city-badge.coming-soon {
+  background-color: #64748b;
+}
+
+.city-info {
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.city-info h3 {
+  font-size: 1.4rem;
+  margin-bottom: 12px;
+  color: var(--primary-color);
+}
+
+.city-info p {
+  color: var(--text-muted);
+  margin-bottom: 25px;
+  font-size: 0.95rem;
+  flex-grow: 1;
+}
+
+.btn-card {
+  background-color: transparent;
+  color: var(--secondary-color);
+  border: 2px solid var(--secondary-color);
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: bold;
+  transition: all 0.3s;
+}
+
+.city-card:not(.disabled):hover .btn-card {
+  background-color: var(--secondary-color);
+  color: white;
+}
+
+.city-card.disabled {
+  opacity: 0.7;
+}
+
+.disabled-btn {
+  border-color: #cbd5e1;
+  color: #94a3b8;
+  cursor: not-allowed;
+}
+
+/* 互動工具介紹區 */
+.tools-overview {
+  background-color: rgba(247, 127, 0, 0.03);
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.tools-overview h2 {
+  color: var(--primary-color);
+  margin-bottom: 30px;
+}
+
+.tools-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 25px;
+}
+
+.tool-item {
+  background-color: white;
+  padding: 30px 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+}
+
+.tool-icon {
+  font-size: 2.5rem;
+  display: block;
+  margin-bottom: 15px;
+}
+
+.tool-item h4 {
+  color: var(--primary-color);
+  margin-bottom: 10px;
+}
+
+/* Footer 頁尾 */
+.footer {
+  background-color: var(--primary-color);
+  color: #94a3b8;
+  text-align: center;
+  padding: 20px;
+  font-size: 0.85rem;
+}
+
+/* ==========================================================================
+   4. 東京攻略內頁元件庫 (Attraction Detail & Cards Style) - 保留並優化你原有的樣式
+   ========================================================================== */
+.container {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+/* 返回主網頁按鈕 */
+.back-to-portal {
+  max-width: 1200px;
+  margin: 20px auto 0;
+  padding: 0 20px;
+}
+
+.btn-back {
+  display: inline-block;
+  padding: 9px 18px;
+  background-color: var(--primary-color);
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: 0.9rem;
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.btn-back:hover {
+  background-color: transparent;
+  color: var(--secondary-color);
+  border-color: var(--secondary-color);
+  transform: translateX(-4px);
+}
+
+/* 東攻略內頁的卡片排版 */
+.card-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
+  margin-top: 20px;
+  margin-bottom: 40px;
+}
+
+.card {
+  background-color: white;
+  border-radius: 10px;
+  padding: 25px;
+  box-shadow: var(--card-shadow);
+  transition:
+    transform 0.3s,
+    box-shadow 0.3s;
+  border-top: 4px solid var(--primary-color); /* 上方帶有深藏青質感邊框 */
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--hover-shadow);
+}
+
+.card-header {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: var(--primary-color);
+  margin-bottom: 12px;
+  border-bottom: 1px solid #e2e8f0;
+  padding-bottom: 8px;
+}
+
+/* 景點標籤 Tags 樣式 */
+.tag-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.tag-btn {
+  background-color: #e2e8f0;
+  color: var(--text-dark);
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.tag-btn:hover {
+  background-color: var(--secondary-color);
+  color: white;
+}
+
+/* ==========================================================================
+   5. RWD 行動裝置響應式微調 (Responsive Design)
+   ========================================================================== */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    gap: 12px;
+    padding: 15px;
+  }
+
+  .navbar nav ul {
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .navbar nav ul li {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
+  .dropdown-content {
+    position: static; /* 手機板讓下拉選單直接展開在下方 */
+    box-shadow: none;
+    background-color: rgba(255, 255, 255, 0.05);
+    width: 100%;
+    min-width: 100%;
+  }
+
+  .dropdown-content li a {
+    color: #cbd5e1 !important; /* 手機展開時在深底色下改回淺色字 */
+    text-align: center;
+  }
+
+  .hero-content h1 {
+    font-size: 2rem;
+  }
+}
