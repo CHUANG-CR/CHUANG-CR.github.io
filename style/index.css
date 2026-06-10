@@ -1,17 +1,21 @@
 /* ==========================================================================
    1. 全域重設與變數設定 (Global Reset & Variables)
+   用來集中管理網站主要色彩、陰影與全站基礎樣式，方便後續統一調整
    ========================================================================== */
 :root {
-  --primary-color: #0d1b2a; /* 深藏青色 */
-  --secondary-color: #f77f00; /* 溫暖橘色 */
-  --text-dark: #1e293b; /* 深色文字 */
-  --text-light: #f8fafc; /* 淺色文字 */
-  --text-muted: #64748b; /* 灰色次要文字 */
-  --bg-light: #f8f9fa; /* 網頁淺色背景 */
-  --card-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-  --hover-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+  --primary-color: #0d1b2a; /* 主色：深藏青色，常用於導覽列、標題、頁尾 */
+  --secondary-color: #f77f00; /* 輔助色：溫暖橘色，常用於按鈕、hover、重點標示 */
+  --text-dark: #1e293b; /* 主要文字顏色，適合一般段落與標題 */
+  --text-light: #f8fafc; /* 淺色文字，通常搭配深色背景使用 */
+  --text-muted: #64748b; /* 次要文字顏色，適合說明文字、摘要、提示內容 */
+  --bg-light: #f8f9fa; /* 全站背景底色，營造乾淨明亮感 */
+  --card-shadow: 0 4px 15px rgba(0, 0, 0, 0.08); /* 一般卡片陰影 */
+  --hover-shadow: 0 12px 30px rgba(0, 0, 0, 0.15); /* 滑鼠移入時的加強陰影 */
 }
 
+/* 全域重設：
+   清除瀏覽器預設 margin / padding，
+   並統一盒模型計算方式，避免排版尺寸難以控制 */
 * {
   margin: 0;
   padding: 0;
@@ -20,12 +24,16 @@
     "PingFang TC", "Helvetica Neue", "Microsoft JhengHei", sans-serif;
 }
 
+/* body 是整個頁面的主要容器：
+   設定背景色、文字色與預設行高，提升整體閱讀性 */
 body {
   background-color: var(--bg-light);
   color: var(--text-dark);
   line-height: 1.6;
 }
 
+/* 讓所有圖片具備基本響應式能力：
+   不超出父容器寬度，並維持原始比例 */
 img {
   max-width: 100%;
   height: auto;
@@ -33,46 +41,53 @@ img {
 }
 
 /* ===================================================
-   安全防污染版：導覽列與下拉選單樣式
+   2. 安全防污染版：導覽列與下拉選單樣式
+   這一段重點在於限制選擇器範圍，避免巢狀 ul/li 被誤套 flex 或 margin
    =================================================== */
 
-/* 導覽列主容器 */
+/* 導覽列主容器：
+   使用 flex 讓 logo 與選單左右排列，
+   sticky 讓導覽列捲動時固定在頁面頂端 */
 .navbar {
-  background-color: #0d1b2a; /* 深藏青色 */
+  background-color: #0d1b2a; /* 導覽列背景使用主色 */
   color: white;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: space-between; /* 左右分散排列 */
+  align-items: center; /* 垂直置中 */
   padding: 15px 5%;
-  position: sticky;
+  position: sticky; /* 捲動時固定在視窗上方 */
   top: 0;
-  z-index: 1000;
+  z-index: 1000; /* 避免被其他區塊蓋住 */
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
-  overflow: visible !important; /* 允許下拉選單正常溢出顯示 */
+  overflow: visible !important; /* 允許下拉選單超出 navbar 顯示 */
 }
 
+/* 網站 Logo / 品牌名稱樣式 */
 .navbar .logo {
   font-size: 1.25rem;
   font-weight: bold;
   letter-spacing: 1px;
 }
 
-/* 【關鍵：用 > 限制】僅針對第一層的主選單 ul */
+/* 第一層主選單 ul：
+   使用 > 限制只作用在 nav 內第一層 ul，避免第二層 dropdown 被橫向排列 */
 .navbar nav > ul {
-  display: flex; /* 只有第一層橫著排 */
-  list-style: none;
+  display: flex; /* 第一層主選單橫向排列 */
+  list-style: none; /* 移除原生項目符號 */
   margin: 0;
   padding: 0;
   align-items: center;
 }
 
-/* 【關鍵：用 > 限制】僅針對第一層的 li */
+/* 第一層主選單 li：
+   position: relative 提供給子層下拉選單絕對定位參考 */
 .navbar nav > ul > li {
-  position: relative; /* 讓第二層選單以此為定位基準 */
-  margin-left: 25px; /* 只有第一層項目有左邊距 */
+  position: relative;
+  margin-left: 25px; /* 主選單項目之間的水平間距 */
 }
 
-/* 【關鍵：用 > 限制】僅針對第一層的文字連結 */
+/* 第一層主選單 a：
+   設定文字樣式、點擊區域大小與 hover 過渡效果 */
 .navbar nav > ul > li > a {
   color: #cbd5e1;
   text-decoration: none;
@@ -82,108 +97,117 @@ img {
   transition: color 0.3s;
 }
 
+/* 滑鼠移入或目前所在頁面 active 狀態 */
 .navbar nav > ul > li > a:hover,
 .navbar nav > ul > li > a.active {
-  color: #f77f00; /* 溫暖橘色 */
+  color: #f77f00;
   font-weight: bold;
 }
 
 /* ===================================================
-   獨立的第二層下拉選單（完全不受上方 flex 與 margin 影響）
+   2-1. 獨立的第二層下拉選單
+   這裡刻意與第一層選單樣式切開，避免受到 flex / margin 繼承污染
    =================================================== */
 
-/* 下拉選單白色外殼容器 */
+/* 下拉選單外層容器：
+   預設隱藏，當 hover 到父層 li 時再顯示 */
 .dropdown-content {
-  display: none; /* 預設隱藏 */
-  position: absolute; /* 絕對定位 */
-  top: 100%; /* 緊貼在母選項下方 */
+  display: none; /* 初始不顯示 */
+  position: absolute; /* 相對於父層 li 定位 */
+  top: 100%; /* 顯示在主選單正下方 */
   left: 0;
-  background-color: white; /* 下拉選單強制白底 */
-  min-width: 160px;
+  background-color: white; /* 白底方便閱讀 */
+  min-width: 160px; /* 設定最小寬度避免過窄 */
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
   border-radius: 8px;
   padding: 8px 0;
   margin: 0;
   list-style: none !important;
-  z-index: 9999;
-  flex-direction: column !important; /* 強制重設為直向排列 */
+  z-index: 9999; /* 確保蓋在其他元素之上 */
+  flex-direction: column !important; /* 即使被其他樣式影響，也強制直向排列 */
 }
 
-/* 下拉選單內的 li 項目 */
+/* 下拉選單每一個項目 li */
 .dropdown-content > li {
-  margin: 0 !important; /* 歸零，切断第一層 margin-left 的污染 */
+  margin: 0 !important; /* 清除可能從第一層 li 繼承來的 margin */
   width: 100%;
 }
 
-/* 下拉選單內的城市文字連結 */
+/* 下拉選單中的連結樣式 */
 .dropdown-content > li > a {
-  color: #333333 !important; /* 強制為深灰色字，解決白底白字隱形問題 */
+  color: #333333 !important; /* 避免白底白字導致看不見 */
   padding: 12px 20px !important;
   font-size: 0.95rem !important;
   font-weight: normal !important;
   text-align: left;
   display: block !important;
   text-decoration: none !important;
-  white-space: nowrap; /* 防止名字因為選單寬度不夠被擠到換行 */
+  white-space: nowrap; /* 避免文字自動換行破版 */
   transition:
     background 0.2s,
     color 0.2s;
 }
 
 /* ===================================================
-   觸發動態顯示的效果
+   2-2. 下拉選單互動效果
    =================================================== */
 
-/* 當滑鼠移入時，下拉選單以 flex 彈出（維持直排） */
+/* 滑鼠移到有 dropdown 的主選單項目時，顯示子選單 */
 .navbar nav > ul > li.dropdown:hover .dropdown-content {
   display: flex !important;
 }
 
-/* 滑鼠移入城市選項時的視覺效果 */
+/* 滑鼠移到子選單項目時的視覺回饋 */
 .dropdown-content > li > a:hover {
-  background-color: #f1f5f9 !important; /* 淡淡的滑過灰 */
-  color: #f77f00 !important; /* 字體變橘色 */
+  background-color: #f1f5f9;
+  color: #f77f00 !important;
   font-weight: bold !important;
 }
 
 /* ==========================================================================
    3. 入口首頁專用佈局 (Portal Home Page Components)
+   包含 Hero 主視覺、城市卡片區、工具介紹區與頁尾
    ========================================================================== */
-/* Hero 主視覺大橫幅 - 圖片背景版 */
+
+/* Hero 主視覺區塊：
+   用背景圖搭配深色半透明漸層遮罩，讓白字更清楚 */
 .hero-section {
-  /* 重點：前半段是半透明黑底遮罩，後半段 url() 放你的圖片路徑 */
   background:
     linear-gradient(rgba(13, 27, 42, 0.6), rgba(13, 27, 42, 0.8)),
-    url("../images/fuji-mountain.jpg"); /* 替換成你的圖片檔名 */
+    url("../images/fuji-mountain.jpg"); /* Hero 背景圖片路徑 */
 
-  background-size: cover; /* 讓圖片自動縮放、完美填滿整個區塊 */
-  background-position: center; /* 讓圖片居中對齊，換螢幕時不歪掉 */
-  background-repeat: no-repeat; /* 防止圖片因為太小而重複拼接 */
+  background-size: cover; /* 圖片填滿整個區塊 */
+  background-position: center; /* 圖片置中 */
+  background-repeat: no-repeat; /* 不重複平鋪 */
   color: white;
   text-align: center;
-  padding: 120px 20px; /* 如果想讓橫幅更高，可以把 100px 加大到 120px */
+  padding: 120px 20px; /* 控制 Hero 上下高度與左右留白 */
 }
+
+/* Hero 主標題 */
 .hero-content h1 {
   font-size: 2.8rem;
   margin-bottom: 20px;
   letter-spacing: 2px;
 }
 
+/* Hero 說明文字 */
 .hero-content p {
   font-size: 1.15rem;
   margin-bottom: 35px;
-  max-width: 650px;
+  max-width: 650px; /* 限制文字寬度，避免太長難閱讀 */
   margin-left: auto;
   margin-right: auto;
   color: #e2e8f0;
 }
 
+/* Hero 主按鈕樣式 */
 .btn-primary {
   background-color: var(--secondary-color);
   color: white;
   padding: 12px 30px;
   text-decoration: none;
-  border-radius: 30px;
+  border-radius: 30px; /* 做成膠囊按鈕感 */
   font-weight: bold;
   font-size: 1rem;
   transition:
@@ -193,18 +217,21 @@ img {
   box-shadow: 0 4px 10px rgba(247, 127, 0, 0.3);
 }
 
+/* 主按鈕 hover 效果：微微浮起 */
 .btn-primary:hover {
   background-color: #d66f00;
   transform: translateY(-2px);
 }
 
-/* 城市攻略卡片區塊 */
+/* 城市攻略主內容容器：
+   控制最大寬度並讓內容置中 */
 .portal-container {
   max-width: 1200px;
   margin: 60px auto;
   padding: 0 25px;
 }
 
+/* 區塊標題 */
 .section-title {
   text-align: center;
   margin-bottom: 40px;
@@ -212,6 +239,7 @@ img {
   color: var(--primary-color);
 }
 
+/* 區塊標題下方橘色裝飾線 */
 .section-title::after {
   content: "";
   display: block;
@@ -222,30 +250,35 @@ img {
   border-radius: 2px;
 }
 
+/* 城市卡片網格：
+   使用自適應 grid，畫面夠寬時可自動多欄排列 */
 .city-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 30px;
 }
 
+/* 單張城市卡片 */
 .city-card {
   background-color: white;
   border-radius: 12px;
-  overflow: hidden;
+  overflow: hidden; /* 避免內部圖片或元素超出圓角 */
   box-shadow: var(--card-shadow);
-  position: relative;
+  position: relative; /* 給 badge 絕對定位使用 */
   transition:
     transform 0.3s,
     box-shadow 0.3s;
   display: flex;
-  flex-direction: column;
+  flex-direction: column; /* 讓卡片內容可上下排列 */
 }
 
+/* 卡片滑鼠移入效果 */
 .city-card:hover {
   transform: translateY(-5px);
   box-shadow: var(--hover-shadow);
 }
 
+/* 卡片右上角的狀態標籤，例如熱門 / 即將推出 */
 .city-badge {
   position: absolute;
   top: 15px;
@@ -259,30 +292,35 @@ img {
   z-index: 10;
 }
 
+/* 即將推出的 badge 使用灰色區別 */
 .city-badge.coming-soon {
   background-color: #64748b;
 }
 
+/* 卡片文字資訊區 */
 .city-info {
   padding: 30px;
   display: flex;
   flex-direction: column;
-  flex-grow: 1;
+  flex-grow: 1; /* 讓內容區撐滿卡片剩餘空間 */
 }
 
+/* 城市名稱標題 */
 .city-info h3 {
   font-size: 1.4rem;
   margin-bottom: 12px;
   color: var(--primary-color);
 }
 
+/* 城市簡介文字 */
 .city-info p {
   color: var(--text-muted);
   margin-bottom: 25px;
   font-size: 0.95rem;
-  flex-grow: 1;
+  flex-grow: 1; /* 讓按鈕能被推到底部，卡片更整齊 */
 }
 
+/* 卡片內按鈕 */
 .btn-card {
   background-color: transparent;
   color: var(--secondary-color);
@@ -295,33 +333,39 @@ img {
   transition: all 0.3s;
 }
 
+/* 非 disabled 卡片在 hover 時，內部按鈕同步變成實心 */
 .city-card:not(.disabled):hover .btn-card {
   background-color: var(--secondary-color);
   color: white;
 }
 
+/* 尚未開放卡片：整體透明度降低 */
 .city-card.disabled {
   opacity: 0.7;
 }
 
+/* 禁用按鈕樣式 */
 .disabled-btn {
   border-color: #cbd5e1;
   color: #94a3b8;
   cursor: not-allowed;
 }
 
-/* 互動工具介紹區 */
+/* 互動工具介紹區：
+   用淡橘背景與卡片式內容區分主頁其他段落 */
 .tools-overview {
   background-color: rgba(247, 127, 0, 0.03);
   padding: 60px 20px;
   text-align: center;
 }
 
+/* 工具介紹區標題 */
 .tools-overview h2 {
   color: var(--primary-color);
   margin-bottom: 30px;
 }
 
+/* 工具項目網格 */
 .tools-grid {
   max-width: 1200px;
   margin: 0 auto;
@@ -330,6 +374,7 @@ img {
   gap: 25px;
 }
 
+/* 單一工具卡片 */
 .tool-item {
   background-color: white;
   padding: 30px 20px;
@@ -337,18 +382,21 @@ img {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
 }
 
+/* 工具圖示 */
 .tool-icon {
   font-size: 2.5rem;
   display: block;
   margin-bottom: 15px;
 }
 
+/* 工具卡片標題 */
 .tool-item h4 {
   color: var(--primary-color);
   margin-bottom: 10px;
 }
 
-/* Footer 頁尾 */
+/* Footer 頁尾：
+   提供版權、附加資訊或網站收尾內容 */
 .footer {
   background-color: var(--primary-color);
   color: #94a3b8;
@@ -358,21 +406,25 @@ img {
 }
 
 /* ==========================================================================
-   4. 東京攻略內頁元件庫 (Attraction Detail & Cards Style) - 保留並優化你原有的樣式
+   4. 東京攻略內頁元件庫 (Attraction Detail & Cards Style)
+   給各城市或景點詳細頁面使用的共用樣式
    ========================================================================== */
+
+/* 內容主容器 */
 .container {
   max-width: 1200px;
   margin: 40px auto;
   padding: 0 20px;
 }
 
-/* 返回主網頁按鈕 */
+/* 返回首頁 / 返回入口頁區塊 */
 .back-to-portal {
   max-width: 1200px;
   margin: 20px auto 0;
   padding: 0 20px;
 }
 
+/* 返回按鈕 */
 .btn-back {
   display: inline-block;
   padding: 9px 18px;
@@ -386,6 +438,7 @@ img {
   transition: all 0.3s ease;
 }
 
+/* 返回按鈕 hover：反白邊框並微微左移 */
 .btn-back:hover {
   background-color: transparent;
   color: var(--secondary-color);
@@ -393,7 +446,7 @@ img {
   transform: translateX(-4px);
 }
 
-/* 東攻略內頁的卡片排版 */
+/* 詳細頁卡片網格排版 */
 .card-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -402,6 +455,7 @@ img {
   margin-bottom: 40px;
 }
 
+/* 詳細頁資訊卡片 */
 .card {
   background-color: white;
   border-radius: 10px;
@@ -410,14 +464,16 @@ img {
   transition:
     transform 0.3s,
     box-shadow 0.3s;
-  border-top: 4px solid var(--primary-color); /* 上方帶有深藏青質感邊框 */
+  border-top: 4px solid var(--primary-color); /* 用上邊框作為視覺識別 */
 }
 
+/* 卡片 hover 效果 */
 .card:hover {
   transform: translateY(-4px);
   box-shadow: var(--hover-shadow);
 }
 
+/* 卡片標題區 */
 .card-header {
   font-size: 1.2rem;
   font-weight: bold;
@@ -427,7 +483,8 @@ img {
   padding-bottom: 8px;
 }
 
-/* 景點標籤 Tags 樣式 */
+/* 景點標籤容器：
+   讓多個 tag 可以自動換行 */
 .tag-container {
   display: flex;
   flex-wrap: wrap;
@@ -435,6 +492,7 @@ img {
   margin-top: 15px;
 }
 
+/* 標籤按鈕樣式 */
 .tag-btn {
   background-color: #e2e8f0;
   color: var(--text-dark);
@@ -445,6 +503,7 @@ img {
   transition: all 0.2s;
 }
 
+/* 標籤 hover 效果 */
 .tag-btn:hover {
   background-color: var(--secondary-color);
   color: white;
@@ -452,14 +511,17 @@ img {
 
 /* ==========================================================================
    5. RWD 行動裝置響應式微調 (Responsive Design)
+   針對平板與手機畫面優化排版
    ========================================================================== */
 @media (max-width: 768px) {
+  /* 手機版導覽列改為上下排列 */
   .navbar {
     flex-direction: column;
     gap: 12px;
     padding: 15px;
   }
 
+  /* 手機版選單允許換行，避免擠在同一排 */
   .navbar nav ul {
     width: 100%;
     justify-content: center;
@@ -467,24 +529,29 @@ img {
     gap: 10px;
   }
 
+  /* 縮小手機版選單項目左右間距 */
   .navbar nav ul li {
     margin-left: 10px;
     margin-right: 10px;
   }
 
+  /* 手機版下拉選單改為靜態流式排版，
+     讓它直接出現在選單下方，不使用 absolute 浮動 */
   .dropdown-content {
-    position: static; /* 手機板讓下拉選單直接展開在下方 */
+    position: static;
     box-shadow: none;
     background-color: rgba(255, 255, 255, 0.05);
     width: 100%;
     min-width: 100%;
   }
 
+  /* 手機版下拉選單因背景較深，字色改回淺色並置中 */
   .dropdown-content li a {
-    color: #cbd5e1 !important; /* 手機展開時在深底色下改回淺色字 */
+    color: #cbd5e1 !important;
     text-align: center;
   }
 
+  /* 手機版 Hero 標題縮小，避免第一屏被字塞滿 */
   .hero-content h1 {
     font-size: 2rem;
   }

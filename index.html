@@ -1,27 +1,58 @@
 <!doctype html>
 <html lang="zh-TW">
   <head>
+    <!-- 網頁字元編碼：
+         使用 UTF-8 可正常顯示中文、英文與特殊符號 -->
     <meta charset="UTF-8" />
+
+    <!-- 響應式網頁設定：
+         讓手機裝置依照實際螢幕寬度呈現，不會預設縮小整頁 -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- 瀏覽器分頁標題 -->
     <title>亞洲旅遊指南</title>
+
+    <!-- 載入外部 CSS 樣式檔 -->
     <link rel="stylesheet" href="/style/index.css" />
+
+    <!-- 網站 favicon 圖示，會顯示在瀏覽器分頁左側 -->
     <link rel="icon" href="images/favicon.ico" type="image/x-icon" />
+
+    <!-- 預先與 Google Fonts 建立連線，提升字型載入速度 -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- 載入 Noto Sans TC 字型，提供繁體中文較佳顯示效果 -->
     <link
       href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap"
       rel="stylesheet"
     />
   </head>
+
   <body>
+    <!-- ===================================================
+         1. 網站頁首 Header
+         包含 Logo、主選單、國家分類下拉選單
+         =================================================== -->
     <header class="navbar">
+      <!-- 網站品牌名稱 / Logo 區 -->
       <div class="logo">🌍 亞洲旅遊指南</div>
+
+      <!-- 導覽列 -->
       <nav>
         <ul>
+          <!-- 目前所在頁面，使用 active 樣式標記 -->
           <li><a href="#" class="active">首頁</a></li>
+
+          <!-- 頁內錨點連結：導向旅遊工具介紹區 -->
           <li><a href="#tools">旅遊工具</a></li>
+
+          <!-- 日本地區下拉選單 -->
           <li class="dropdown">
+            <!-- dropbtn 是主選單按鈕，點擊或 hover 可展開子選單 -->
             <a href="#" class="dropbtn">日本 ▼</a>
+
+            <!-- 第二層下拉選單 -->
             <ul class="dropdown-content">
               <li><a href="page/tokyo.html">東京篇</a></li>
               <li><a href="#">大阪篇 (準備中)</a></li>
@@ -29,6 +60,7 @@
             </ul>
           </li>
 
+          <!-- 韓國地區下拉選單 -->
           <li class="dropdown">
             <a href="#" class="dropbtn">韓國 ▼</a>
             <ul class="dropdown-content">
@@ -39,30 +71,59 @@
         </ul>
       </nav>
     </header>
+
+    <!-- ===================================================
+         2. Hero 主視覺區塊
+         網站首頁第一眼看到的主標題、簡介與 CTA 按鈕
+         =================================================== -->
     <section class="hero-section">
       <div class="hero-content">
+        <!-- 主標題 -->
         <h1>探索世界，從這裡開始</h1>
+
+        <!-- Hero 說明文字 -->
         <p>
           最完整的交通指南、必吃美食、高CP值住宿與行前清單，助你輕鬆規劃完美旅程！
         </p>
+
+        <!-- 頁內錨點按鈕：點擊後跳到熱門城市攻略區 -->
         <a href="#destinations" class="btn-primary">選擇你想去的城市</a>
       </div>
     </section>
 
+    <!-- ===================================================
+         3. 熱門城市攻略區
+         顯示目前已上線或即將推出的城市卡片
+         =================================================== -->
     <section id="destinations" class="portal-container">
+      <!-- 區塊標題 -->
       <h2 class="section-title">熱門城市攻略</h2>
+
+      <!-- 城市卡片網格容器 -->
       <div class="city-grid">
+        <!-- -------------------------------
+             東京卡片：已開放進入詳細頁
+             ------------------------------- -->
         <div class="city-card">
+          <!-- 卡片角落標籤 -->
           <div class="city-badge">熱門推薦</div>
+
+          <!-- 城市文字資訊 -->
           <div class="city-info">
             <h3>🗼 東京 Tokyo</h3>
             <p>
               潮流與傳統交織的迷人首都。包含築地美食、淺草文化、新宿購物狂歡，以及最讓新手頭痛的超詳細地鐵交通完全攻略！
             </p>
+
+            <!-- 導向東京詳細頁 -->
             <a href="page/tokyo.html" class="btn-card">進入東京攻略 →</a>
           </div>
         </div>
 
+        <!-- -------------------------------
+             大阪卡片：尚未開放
+             使用 disabled 樣式表示為灰化狀態
+             ------------------------------- -->
         <div class="city-card disabled">
           <div class="city-badge coming-soon">即將上線</div>
           <div class="city-info">
@@ -70,10 +131,15 @@
             <p>
               美食與笑聲不斷的活力之都。道頓堀章魚燒、心齋橋購物天堂、環球影城玩樂全指南，帶你體驗關西的熱情魅力！
             </p>
+
+            <!-- 尚未開放，因此按鈕不導向實際頁面 -->
             <a href="#" class="btn-card disabled-btn">敬請期待</a>
           </div>
         </div>
 
+        <!-- -------------------------------
+             京都卡片：尚未開放
+             ------------------------------- -->
         <div class="city-card disabled">
           <div class="city-badge coming-soon">即將上線</div>
           <div class="city-info">
@@ -87,13 +153,23 @@
       </div>
     </section>
 
+    <!-- ===================================================
+         4. 互動工具介紹區
+         說明網站內建的實用功能，增加首頁資訊完整度
+         =================================================== -->
     <section id="tools" class="tools-overview">
       <div class="container">
+        <!-- 區塊標題 -->
         <h2>網站專屬互動工具</h2>
+
+        <!-- 區塊說明文字 -->
         <p>
           我們在各城市詳細攻略頁面中內建了貼心互動工具，幫你分擔繁瑣的行前準備：
         </p>
+
+        <!-- 工具卡片網格 -->
         <div class="tools-grid">
+          <!-- 工具 1：即時匯率換算 -->
           <div class="tool-item">
             <span class="tool-icon">💵</span>
             <h4>即時匯率換算</h4>
@@ -101,6 +177,8 @@
               攻略內建即時換算機，點選購物時能一秒換算台幣，買東西不再敲破計算機。
             </p>
           </div>
+
+          <!-- 工具 2：互動行前清單 -->
           <div class="tool-item">
             <span class="tool-icon">✅</span>
             <h4>互動行前清單</h4>
@@ -108,6 +186,8 @@
               護照、網卡、日幣換匯，提供線上打勾確認清單，打勾確認不怕漏掉任何東西。
             </p>
           </div>
+
+          <!-- 工具 3：旅遊動線規劃 -->
           <div class="tool-item">
             <span class="tool-icon">🗺️</span>
             <h4>流暢動線規劃</h4>
@@ -117,6 +197,10 @@
       </div>
     </section>
 
+    <!-- ===================================================
+         5. 網站頁尾 Footer
+         顯示版權、標語或收尾資訊
+         =================================================== -->
     <footer class="footer">
       <p>
         © 2026/10/23，去別人覺得無聊的地方看看吧。<br />將嚮往的遠方，變成走過的地方。
