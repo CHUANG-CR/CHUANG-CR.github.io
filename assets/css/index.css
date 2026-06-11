@@ -25,9 +25,6 @@
   --text-color: #333344;
 }
 
-/* 全域重設：
-   清除瀏覽器預設 margin / padding，
-   並統一盒模型計算方式，避免排版尺寸難以控制 */
 * {
   margin: 0;
   padding: 0;
