@@ -190,7 +190,7 @@ img {
 .hero-section {
   background:
     linear-gradient(rgba(13, 27, 42, 0.6), rgba(13, 27, 42, 0.8)),
-    url("../images/fuji-mountain.jpg"); /* Hero 背景圖片路徑 */
+    url("assets/images/fuji-mountain.jpg"); /* Hero 背景圖片路徑 */
 
   background-size: cover; /* 圖片填滿整個區塊 */
   background-position: center; /* 圖片置中 */
