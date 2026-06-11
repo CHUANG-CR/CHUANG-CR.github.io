@@ -2,15 +2,15 @@
    1. 預設主題 (預設為冷色調/深藏青)
    ========================================== */
 :root {
-  --primary-color: #2e365a;
-  --secondary-color: #6b597f;
-  --highlight-color: #f77f00;
-  --text-dark: #a2869c;
-  --text-light: #bd6c73;
-  --text-muted: #92a1c2;
-  --bg-light: #3f5b8d;
+  --primary-color: #0077b6;
+  --secondary-color: #00b4d8;
+  --highlight-color: #ffb703;
+  --text-dark: #03045e;
+  --text-light: #ffffff;
+  --text-muted: #64748b;
+  --bg-light: #faf9f6;
   --color-white: #ffffff;
-  --color-black: #333333;
+  --color-border: #e2e8f0;
 }
 
 /* ==========================================
@@ -18,12 +18,15 @@
    只要當 html 標籤被加上 data-theme="dark" 時就會自動啟用
    ========================================== */
 [data-theme="dark"] {
-  --primary-color: #0f172a; /* 改為極深藍黑 */
-  --bg-light: #1e293b; /* 背景改深灰藍 */
-  --text-dark: #f1f5f9; /* 主要文字變亮色，方便閱讀 */
-  --text-muted: #94a3b8; /* 次要文字變淡灰 */
-  --color-white: #334155; /* 卡片原本是白色，這裡改成深色卡片 */
-  --color-black: #cbd5e1; /* 下拉選單文字顏色反轉 */
+  --primary-color: #023e8a;
+  --secondary-color: #0077b6;
+  --highlight-color: #ffb703;
+  --text-dark: #03045e;
+  --text-light: #f8fafc;
+  --text-muted: #94a3b8;
+  --bg-light: #f1f5f9;
+  --color-white: #ffffff;
+  --color-border: #e2e8f0;
 }
 
 /* 全域重設：
