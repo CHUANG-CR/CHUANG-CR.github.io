@@ -44,4 +44,21 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   }
+
+  // ==========================================
+  // 3. 熱門城市攻略左右滾動控制功能
+  // ==========================================
+  const prevBtn = document.getElementById("prev-btn");
+  const nextBtn = document.getElementById("next-btn");
+  const grid = document.querySelector(".city-grid");
+
+  if (prevBtn && nextBtn && grid) {
+    prevBtn.addEventListener("click", () => {
+      grid.scrollBy({ left: -grid.clientWidth, behavior: "smooth" });
+    });
+
+    nextBtn.addEventListener("click", () => {
+      grid.scrollBy({ left: grid.clientWidth, behavior: "smooth" });
+    });
+  }
 });
