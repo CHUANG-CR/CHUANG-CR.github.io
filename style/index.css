@@ -1,16 +1,29 @@
-/* ==========================================================================
-   1. 全域重設與變數設定 (Global Reset & Variables)
-   用來集中管理網站主要色彩、陰影與全站基礎樣式，方便後續統一調整
-   ========================================================================== */
+/* ==========================================
+   1. 預設主題 (預設為冷色調/深藏青)
+   ========================================== */
 :root {
-  --primary-color: #0d1b2a; /* 主色：深藏青色，常用於導覽列、標題、頁尾 */
-  --secondary-color: #f77f00; /* 輔助色：溫暖橘色，常用於按鈕、hover、重點標示 */
-  --text-dark: #1e293b; /* 主要文字顏色，適合一般段落與標題 */
-  --text-light: #f8fafc; /* 淺色文字，通常搭配深色背景使用 */
-  --text-muted: #64748b; /* 次要文字顏色，適合說明文字、摘要、提示內容 */
-  --bg-light: #f8f9fa; /* 全站背景底色，營造乾淨明亮感 */
-  --card-shadow: 0 4px 15px rgba(0, 0, 0, 0.08); /* 一般卡片陰影 */
-  --hover-shadow: 0 12px 30px rgba(0, 0, 0, 0.15); /* 滑鼠移入時的加強陰影 */
+  --primary-color: #2e365a;
+  --secondary-color: #6b597f;
+  --highlight-color: #f77f00;
+  --text-dark: #a2869c;
+  --text-light: #bd6c73;
+  --text-muted: #92a1c2;
+  --bg-light: #3f5b8d;
+  --color-white: #ffffff;
+  --color-black: #333333;
+}
+
+/* ==========================================
+   2. 擴充主題 A：深色模式 (Dark Mode)
+   只要當 html 標籤被加上 data-theme="dark" 時就會自動啟用
+   ========================================== */
+[data-theme="dark"] {
+  --primary-color: #0f172a; /* 改為極深藍黑 */
+  --bg-light: #1e293b; /* 背景改深灰藍 */
+  --text-dark: #f1f5f9; /* 主要文字變亮色，方便閱讀 */
+  --text-muted: #94a3b8; /* 次要文字變淡灰 */
+  --color-white: #334155; /* 卡片原本是白色，這裡改成深色卡片 */
+  --color-black: #cbd5e1; /* 下拉選單文字顏色反轉 */
 }
 
 /* 全域重設：
@@ -36,7 +49,7 @@ body {
    不超出父容器寬度，並維持原始比例 */
 img {
   max-width: 100%;
-  height: auto;
+  height: 100%;
   display: block;
 }
 
@@ -49,8 +62,8 @@ img {
    使用 flex 讓 logo 與選單左右排列，
    sticky 讓導覽列捲動時固定在頁面頂端 */
 .navbar {
-  background-color: #0d1b2a; /* 導覽列背景使用主色 */
-  color: white;
+  background-color: var(--primary-color); /* 導覽列背景使用主色 */
+  color: var(--text-dark); /* 導覽列文字使用主要文字色 */
   display: flex;
   justify-content: space-between; /* 左右分散排列 */
   align-items: center; /* 垂直置中 */
@@ -89,7 +102,7 @@ img {
 /* 第一層主選單 a：
    設定文字樣式、點擊區域大小與 hover 過渡效果 */
 .navbar nav > ul > li > a {
-  color: #cbd5e1;
+  color: var(--color-disabled-border);
   text-decoration: none;
   font-size: 1rem;
   padding: 8px 12px;
@@ -100,7 +113,7 @@ img {
 /* 滑鼠移入或目前所在頁面 active 狀態 */
 .navbar nav > ul > li > a:hover,
 .navbar nav > ul > li > a.active {
-  color: #f77f00;
+  color: var(--highlight-color);
   font-weight: bold;
 }
 
@@ -116,7 +129,7 @@ img {
   position: absolute; /* 相對於父層 li 定位 */
   top: 100%; /* 顯示在主選單正下方 */
   left: 0;
-  background-color: white; /* 白底方便閱讀 */
+  background-color: var(--color-white); /* 白底方便閱讀 */
   min-width: 160px; /* 設定最小寬度避免過窄 */
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
   border-radius: 8px;
@@ -135,7 +148,7 @@ img {
 
 /* 下拉選單中的連結樣式 */
 .dropdown-content > li > a {
-  color: #333333 !important; /* 避免白底白字導致看不見 */
+  color: var(--color-black) !important; /* 避免白底白字導致看不見 */
   padding: 12px 20px !important;
   font-size: 0.95rem !important;
   font-weight: normal !important;
@@ -159,8 +172,8 @@ img {
 
 /* 滑鼠移到子選單項目時的視覺回饋 */
 .dropdown-content > li > a:hover {
-  background-color: #f1f5f9;
-  color: #f77f00 !important;
+  background-color: var(--color-gray-light);
+  color: var(--highlight-color) !important;
   font-weight: bold !important;
 }
 
@@ -179,7 +192,7 @@ img {
   background-size: cover; /* 圖片填滿整個區塊 */
   background-position: center; /* 圖片置中 */
   background-repeat: no-repeat; /* 不重複平鋪 */
-  color: white;
+  color: var(--color-white);
   text-align: center;
   padding: 120px 20px; /* 控制 Hero 上下高度與左右留白 */
 }
@@ -198,13 +211,13 @@ img {
   max-width: 650px; /* 限制文字寬度，避免太長難閱讀 */
   margin-left: auto;
   margin-right: auto;
-  color: #e2e8f0;
+  color: var(--color-border);
 }
 
 /* Hero 主按鈕樣式 */
 .btn-primary {
   background-color: var(--secondary-color);
-  color: white;
+  color: var(--color-white);
   padding: 12px 30px;
   text-decoration: none;
   border-radius: 30px; /* 做成膠囊按鈕感 */
@@ -214,12 +227,12 @@ img {
     background 0.3s,
     transform 0.2s;
   display: inline-block;
-  box-shadow: 0 4px 10px rgba(247, 127, 0, 0.3);
+  box-shadow: 0 4px 10px rgba(107, 89, 127, 0.3); /* 陰影同步使用輔助色比例縮放 */
 }
 
-/* 主按鈕 hover 效果：微微浮起 */
+/* 主按鈕 hover 效果：微微浮起，顏色改為高亮橘色 */
 .btn-primary:hover {
-  background-color: #d66f00;
+  background-color: var(--highlight-color);
   transform: translateY(-2px);
 }
 
@@ -239,7 +252,7 @@ img {
   color: var(--primary-color);
 }
 
-/* 區塊標題下方橘色裝飾線 */
+/* 區塊標題下方裝飾線 */
 .section-title::after {
   content: "";
   display: block;
@@ -251,7 +264,7 @@ img {
 }
 
 /* 城市卡片網格：
-   使用自適應 grid，畫面夠寬時可自動多欄排列 */
+   畫面夠寬時可自動多欄排列 */
 .city-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -260,7 +273,7 @@ img {
 
 /* 單張城市卡片 */
 .city-card {
-  background-color: white;
+  background-color: var(--color-white);
   border-radius: 12px;
   overflow: hidden; /* 避免內部圖片或元素超出圓角 */
   box-shadow: var(--card-shadow);
@@ -284,7 +297,7 @@ img {
   top: 15px;
   right: 15px;
   background-color: var(--secondary-color);
-  color: white;
+  color: var(--color-white);
   padding: 5px 12px;
   border-radius: 20px;
   font-size: 0.75rem;
@@ -294,7 +307,7 @@ img {
 
 /* 即將推出的 badge 使用灰色區別 */
 .city-badge.coming-soon {
-  background-color: #64748b;
+  background-color: var(--color-gray-muted);
 }
 
 /* 卡片文字資訊區 */
@@ -336,7 +349,7 @@ img {
 /* 非 disabled 卡片在 hover 時，內部按鈕同步變成實心 */
 .city-card:not(.disabled):hover .btn-card {
   background-color: var(--secondary-color);
-  color: white;
+  color: var(--color-white);
 }
 
 /* 尚未開放卡片：整體透明度降低 */
@@ -346,15 +359,15 @@ img {
 
 /* 禁用按鈕樣式 */
 .disabled-btn {
-  border-color: #cbd5e1;
-  color: #94a3b8;
+  border-color: var(--color-disabled-border);
+  color: var(--color-gray-muted);
   cursor: not-allowed;
 }
 
 /* 互動工具介紹區：
-   用淡橘背景與卡片式內容區分主頁其他段落 */
+   用輔助色(淡化)背景與卡片式內容區分主頁其他段落 */
 .tools-overview {
-  background-color: rgba(247, 127, 0, 0.03);
+  background-color: rgba(107, 89, 127, 0.05);
   padding: 60px 20px;
   text-align: center;
 }
@@ -376,7 +389,7 @@ img {
 
 /* 單一工具卡片 */
 .tool-item {
-  background-color: white;
+  background-color: var(--color-white);
   padding: 30px 20px;
   border-radius: 10px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
@@ -399,7 +412,7 @@ img {
    提供版權、附加資訊或網站收尾內容 */
 .footer {
   background-color: var(--primary-color);
-  color: #94a3b8;
+  color: var(--color-gray-muted);
   text-align: center;
   padding: 20px;
   font-size: 0.85rem;
@@ -429,7 +442,7 @@ img {
   display: inline-block;
   padding: 9px 18px;
   background-color: var(--primary-color);
-  color: white;
+  color: var(--color-white);
   text-decoration: none;
   border-radius: 6px;
   font-weight: bold;
@@ -457,7 +470,7 @@ img {
 
 /* 詳細頁資訊卡片 */
 .card {
-  background-color: white;
+  background-color: var(--color-white);
   border-radius: 10px;
   padding: 25px;
   box-shadow: var(--card-shadow);
@@ -479,12 +492,11 @@ img {
   font-weight: bold;
   color: var(--primary-color);
   margin-bottom: 12px;
-  border-bottom: 1px solid #e2e8f0;
+  border-bottom: 1px solid var(--color-border);
   padding-bottom: 8px;
 }
 
-/* 景點標籤容器：
-   讓多個 tag 可以自動換行 */
+/* 景點標籤容器 */
 .tag-container {
   display: flex;
   flex-wrap: wrap;
@@ -494,7 +506,7 @@ img {
 
 /* 標籤按鈕樣式 */
 .tag-btn {
-  background-color: #e2e8f0;
+  background-color: var(--color-border);
   color: var(--text-dark);
   padding: 6px 14px;
   border-radius: 20px;
@@ -506,7 +518,7 @@ img {
 /* 標籤 hover 效果 */
 .tag-btn:hover {
   background-color: var(--secondary-color);
-  color: white;
+  color: var(--color-white);
 }
 
 /* ==========================================================================
@@ -540,14 +552,14 @@ img {
   .dropdown-content {
     position: static;
     box-shadow: none;
-    background-color: rgba(255, 255, 255, 0.05);
+    background-color: rgba(255, 255, 255, 0.05); /* 輕微不透明的白色疊加背景 */
     width: 100%;
     min-width: 100%;
   }
 
   /* 手機版下拉選單因背景較深，字色改回淺色並置中 */
   .dropdown-content li a {
-    color: #cbd5e1 !important;
+    color: var(--color-disabled-border) !important;
     text-align: center;
   }
 
