@@ -18,11 +18,15 @@
    只要當 html 標籤被加上 data-theme="dark" 時就會自動啟用
    ========================================== */
 [data-theme="dark"] {
-  --primary-color: #4a90e2;
+  --primary-color: #ff8ba7;
   --secondary-color: #ff8ba7;
-  --accent-color: #ffde7d;
-  --bg-color: #ffffff;
-  --text-color: #333344;
+  --highlight-color: #00b4d8;
+  --text-dark: #03045e;
+  --text-light: #ffffff;
+  --text-muted: #64748b;
+  --bg-light: #faf9f6;
+  --color-white: #ffffff;
+  --color-border: #e2e8f0;
 }
 
 * {
@@ -515,52 +519,4 @@ img {
 .tag-btn:hover {
   background-color: var(--secondary-color);
   color: var(--color-white);
-}
-
-/* ==========================================================================
-   5. RWD 行動裝置響應式微調 (Responsive Design)
-   針對平板與手機畫面優化排版
-   ========================================================================== */
-@media (max-width: 768px) {
-  /* 手機版導覽列改為上下排列 */
-  .navbar {
-    flex-direction: column;
-    gap: 12px;
-    padding: 15px;
-  }
-
-  /* 手機版選單允許換行，避免擠在同一排 */
-  .navbar nav ul {
-    width: 100%;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 10px;
-  }
-
-  /* 縮小手機版選單項目左右間距 */
-  .navbar nav ul li {
-    margin-left: 10px;
-    margin-right: 10px;
-  }
-
-  /* 手機版下拉選單改為靜態流式排版，
-     讓它直接出現在選單下方，不使用 absolute 浮動 */
-  .dropdown-content {
-    position: static;
-    box-shadow: none;
-    background-color: rgba(255, 255, 255, 0.05); /* 輕微不透明的白色疊加背景 */
-    width: 100%;
-    min-width: 100%;
-  }
-
-  /* 手機版下拉選單因背景較深，字色改回淺色並置中 */
-  .dropdown-content li a {
-    color: var(--color-disabled-border) !important;
-    text-align: center;
-  }
-
-  /* 手機版 Hero 標題縮小，避免第一屏被字塞滿 */
-  .hero-content h1 {
-    font-size: 2rem;
-  }
 }
