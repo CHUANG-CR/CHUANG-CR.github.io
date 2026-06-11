@@ -18,15 +18,11 @@
    只要當 html 標籤被加上 data-theme="dark" 時就會自動啟用
    ========================================== */
 [data-theme="dark"] {
-  --primary-color: #023e8a;
-  --secondary-color: #0077b6;
-  --highlight-color: #ffb703;
-  --text-dark: #03045e;
-  --text-light: #f8fafc;
-  --text-muted: #94a3b8;
-  --bg-light: #f1f5f9;
-  --color-white: #ffffff;
-  --color-border: #e2e8f0;
+  --primary-color: #4a90e2;
+  --secondary-color: #ff8ba7;
+  --accent-color: #ffde7d;
+  --bg-color: #ffffff;
+  --text-color: #333344;
 }
 
 /* 全域重設：
@@ -190,7 +186,7 @@ img {
 .hero-section {
   background:
     linear-gradient(rgba(13, 27, 42, 0.6), rgba(13, 27, 42, 0.8)),
-    url("assets/images/fuji-mountain.jpg"); /* Hero 背景圖片路徑 */
+    url("../images/fuji-mountain.jpg"); /* Hero 背景圖片路徑 */
 
   background-size: cover; /* 圖片填滿整個區塊 */
   background-position: center; /* 圖片置中 */
@@ -214,7 +210,7 @@ img {
   max-width: 650px; /* 限制文字寬度，避免太長難閱讀 */
   margin-left: auto;
   margin-right: auto;
-  color: var(--color-border);
+  color: var(--text-light);
 }
 
 /* Hero 主按鈕樣式 */
