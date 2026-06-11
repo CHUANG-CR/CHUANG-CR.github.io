@@ -2,15 +2,34 @@
    1. 預設主題 (預設為冷色調/深藏青)
    ========================================== */
 :root {
-  --primary-color: #0077b6;
-  --secondary-color: #00b4d8;
-  --highlight-color: #ffb703;
-  --text-dark: #03045e;
+  --primary-color: #1c3144;
+  --secondary-color: #d00000;
+  --highlight-color: #e28743;
+  --text-dark: #2b2d42;
   --text-light: #ffffff;
-  --text-muted: #64748b;
-  --bg-light: #faf9f6;
+  --text-muted: #8d99ae;
+  --bg-light: #faf6f0;
+  
+  /* 基礎與輔助色彩 */
   --color-white: #ffffff;
+  --color-black: #2b2d42;
   --color-border: #e2e8f0;
+  --color-disabled-border: #cbd5e1;
+  --color-gray-light: #f1f5f9;
+  --color-gray-muted: #94a3b8;
+  
+  /* 導覽列專用 */
+  --navbar-bg: var(--primary-color);
+  --navbar-text: #ffffff;
+  --navbar-link: rgba(255, 255, 255, 0.75);
+  
+  /* 頁尾專用 */
+  --footer-bg: var(--primary-color);
+  --footer-text: rgba(255, 255, 255, 0.75);
+  
+  /* 陰影與效果 */
+  --card-shadow: 0 4px 15px rgba(28, 49, 68, 0.05);
+  --hover-shadow: 0 10px 25px rgba(28, 49, 68, 0.12);
 }
 
 /* ==========================================
@@ -18,15 +37,38 @@
    只要當 html 標籤被加上 data-theme="dark" 時就會自動啟用
    ========================================== */
 [data-theme="dark"] {
-  --primary-color: #ff8ba7;
-  --secondary-color: #ff8ba7;
-  --highlight-color: #00b4d8;
-  --text-dark: #03045e;
+  --primary-color: #818cf8;
+  --secondary-color: #22d3ee;
+  --highlight-color: #f472b6;
+  --text-dark: #fafafa;
   --text-light: #ffffff;
-  --text-muted: #64748b;
-  --bg-light: #faf9f6;
-  --color-white: #ffffff;
-  --color-border: #e2e8f0;
+  --text-muted: #a1a1aa;
+  --bg-light: #09090b;
+  
+  /* 基礎與輔助色彩 */
+  --color-white: #18181b;
+  --color-black: #fafafa;
+  --color-border: #27272a;
+  --color-disabled-border: #3f3f46;
+  --color-gray-light: #27272a;
+  --color-gray-muted: #71717a;
+  
+  /* 導覽列專用 */
+  --navbar-bg: #18181b;
+  --navbar-text: #ffffff;
+  --navbar-link: rgba(255, 255, 255, 0.7);
+  
+  /* 頁尾專用 */
+  --footer-bg: #18181b;
+  --footer-text: #ffffff;
+  
+  /* 陰影與效果 */
+  --card-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+  --hover-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 * {
@@ -62,8 +104,8 @@ img {
    使用 flex 讓 logo 與選單左右排列，
    sticky 讓導覽列捲動時固定在頁面頂端 */
 .navbar {
-  background-color: var(--primary-color); /* 導覽列背景使用主色 */
-  color: var(--text-dark); /* 導覽列文字使用主要文字色 */
+  background-color: var(--navbar-bg); /* 導覽列背景使用自訂變數 */
+  color: var(--navbar-text); /* 導覽列文字使用自訂變數 */
   display: flex;
   justify-content: space-between; /* 左右分散排列 */
   align-items: center; /* 垂直置中 */
@@ -80,6 +122,13 @@ img {
   font-size: 1.25rem;
   font-weight: bold;
   letter-spacing: 1px;
+  color: inherit; /* 繼承導覽列文字顏色 */
+  text-decoration: none; /* 移除連結底線 */
+  transition: opacity 0.3s;
+}
+
+.navbar .logo:hover {
+  opacity: 0.85; /* Hover 時微透明，增加點擊回饋 */
 }
 
 /* 第一層主選單 ul：
@@ -102,7 +151,7 @@ img {
 /* 第一層主選單 a：
    設定文字樣式、點擊區域大小與 hover 過渡效果 */
 .navbar nav > ul > li > a {
-  color: var(--color-disabled-border);
+  color: var(--navbar-link);
   text-decoration: none;
   font-size: 1rem;
   padding: 8px 12px;
@@ -182,8 +231,6 @@ img {
    包含 Hero 主視覺、城市卡片區、工具介紹區與頁尾
    ========================================================================== */
 
-/* Hero 主視覺區塊：
-   用背景圖搭配深色半透明漸層遮罩，讓白字更清楚 */
 .hero-section {
   background:
     linear-gradient(rgba(13, 27, 42, 0.6), rgba(13, 27, 42, 0.8)),
@@ -192,9 +239,13 @@ img {
   background-size: cover; /* 圖片填滿整個區塊 */
   background-position: center; /* 圖片置中 */
   background-repeat: no-repeat; /* 不重複平鋪 */
-  color: var(--color-white);
+  color: var(--text-light);
   text-align: center;
-  padding: 120px 20px; /* 控制 Hero 上下高度與左右留白 */
+  padding: 60px 20px; /* 調整內距以利彈性盒置中 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 60vh; /* 調整為平衡高度（約與下方各區塊等高） */
 }
 
 /* Hero 主標題 */
@@ -217,7 +268,7 @@ img {
 /* Hero 主按鈕樣式 */
 .btn-primary {
   background-color: var(--secondary-color);
-  color: var(--color-white);
+  color: var(--text-light);
   padding: 12px 30px;
   text-decoration: none;
   border-radius: 30px; /* 做成膠囊按鈕感 */
@@ -242,6 +293,7 @@ img {
   max-width: 1200px;
   margin: 60px auto;
   padding: 0 25px;
+  scroll-margin-top: 75px; /* 防止被 sticky navbar 遮擋標題 */
 }
 
 /* 區塊標題 */
@@ -263,16 +315,93 @@ img {
   border-radius: 2px;
 }
 
+
+/* 城市卡片左右滾動包裝容器 */
+.destinations-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 0 45px; /* 為兩側箭頭預留空間 */
+}
+
+/* 側邊切換箭頭樣式（與城市卡片等高、細長豎立固定式） */
+.side-arrow {
+  position: absolute;
+  top: 10px; /* 與卡片頂部對齊 */
+  z-index: 100;
+  width: 20px;
+  height: calc(100% - 35px); /* 與卡片等高（扣除 grid 上 10px 下 25px 的 padding） */
+  border-radius: 10px;
+  background-color: var(--color-white);
+  border: 1px solid var(--color-border);
+  color: var(--primary-color);
+  box-shadow: var(--card-shadow);
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.8rem;
+  transition: all 0.3s ease;
+}
+
+.side-arrow:hover {
+  background-color: var(--primary-color);
+  color: var(--text-light);
+  width: 24px; /* Hover 時微幅變寬，極具點擊回饋感 */
+  box-shadow: var(--hover-shadow);
+}
+
+.left-arrow {
+  left: 12px;
+}
+
+.right-arrow {
+  right: 12px;
+}
+
+/* 行動裝置響應式調整 */
+@media (max-width: 767px) {
+  .destinations-wrapper {
+    padding: 0 10px; /* 手機端取消兩側預留，給予最大滾動空間 */
+  }
+  .side-arrow {
+    display: none; /* 手機端隱藏箭頭，以原生滑動為主 */
+  }
+}
+
 /* 城市卡片網格：
-   畫面夠寬時可自動多欄排列 */
+   改為左右滾動佈局 */
 .city-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  display: flex;
+  overflow-x: auto;
   gap: 30px;
+  padding: 10px 15px 25px 15px; /* 增加左右邊距，防止卡片裁剪或貼邊 */
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch; /* 提升 iOS 滾動流暢度 */
+}
+
+/* 左右滾動條精緻美化 */
+.city-grid::-webkit-scrollbar {
+  height: 6px;
+}
+.city-grid::-webkit-scrollbar-track {
+  background: var(--color-gray-light);
+  border-radius: 10px;
+}
+.city-grid::-webkit-scrollbar-thumb {
+  background: var(--color-disabled-border);
+  border-radius: 10px;
+  transition: background 0.3s;
+}
+.city-grid::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
 }
 
 /* 單張城市卡片 */
 .city-card {
+  flex: 0 0 min(350px, 85vw); /* 預設手機端：響應式固定寬度且不收縮 */
+  scroll-snap-align: start;
   background-color: var(--color-white);
   border-radius: 12px;
   overflow: hidden; /* 避免內部圖片或元素超出圓角 */
@@ -283,6 +412,25 @@ img {
     box-shadow 0.3s;
   display: flex;
   flex-direction: column; /* 讓卡片內容可上下排列 */
+}
+
+/* 平板端（768px - 1023px）：一頁顯示 2 個城市 */
+@media (min-width: 768px) {
+  .city-card {
+    flex: 0 0 calc((100% - 30px) / 2);
+  }
+}
+
+/* 桌面端（1024px 及以上）：一頁顯示 3 個城市 */
+@media (min-width: 1024px) {
+  .city-card {
+    flex: 0 0 calc((100% - 60px) / 3);
+  }
+}
+
+/* 最後一張城市卡片右側增加邊距，防止滾動到底時被切掉 */
+.city-card:last-child {
+  margin-right: 15px;
 }
 
 /* 卡片滑鼠移入效果 */
@@ -297,7 +445,7 @@ img {
   top: 15px;
   right: 15px;
   background-color: var(--secondary-color);
-  color: var(--color-white);
+  color: var(--text-light);
   padding: 5px 12px;
   border-radius: 20px;
   font-size: 0.75rem;
@@ -349,7 +497,7 @@ img {
 /* 非 disabled 卡片在 hover 時，內部按鈕同步變成實心 */
 .city-card:not(.disabled):hover .btn-card {
   background-color: var(--secondary-color);
-  color: var(--color-white);
+  color: var(--text-light);
 }
 
 /* 尚未開放卡片：整體透明度降低 */
@@ -370,12 +518,7 @@ img {
   background-color: rgba(107, 89, 127, 0.05);
   padding: 60px 20px;
   text-align: center;
-}
-
-/* 工具介紹區標題 */
-.tools-overview h2 {
-  color: var(--primary-color);
-  margin-bottom: 30px;
+  scroll-margin-top: 75px; /* 防止被 sticky navbar 遮擋標題 */
 }
 
 /* 工具項目網格 */
@@ -392,7 +535,11 @@ img {
   background-color: var(--color-white);
   padding: 30px 20px;
   border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+  box-shadow: var(--card-shadow);
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 /* 工具圖示 */
@@ -400,6 +547,7 @@ img {
   font-size: 2.5rem;
   display: block;
   margin-bottom: 15px;
+  transition: transform 0.3s ease;
 }
 
 /* 工具卡片標題 */
@@ -408,11 +556,58 @@ img {
   margin-bottom: 10px;
 }
 
+/* 確保超連結的所有狀態下（visited, hover, active, focus）都沒有底線，且文字與圖示顏色保持不變 */
+a.tool-item,
+a.tool-item:link,
+a.tool-item:visited,
+a.tool-item:hover,
+a.tool-item:active,
+a.tool-item:focus {
+  text-decoration: none !important;
+  color: var(--text-dark) !important;
+  outline: none;
+}
+
+a.tool-item h4,
+a.tool-item:link h4,
+a.tool-item:visited h4,
+a.tool-item:hover h4,
+a.tool-item:active h4,
+a.tool-item:focus h4 {
+  color: var(--primary-color) !important;
+}
+
+a.tool-item .tool-icon,
+a.tool-item:link .tool-icon,
+a.tool-item:visited .tool-icon,
+a.tool-item:hover .tool-icon,
+a.tool-item:active .tool-icon,
+a.tool-item:focus .tool-icon {
+  color: inherit !important;
+  text-decoration: none !important;
+}
+
+/* 當工具卡片是超連結時的懸停與點擊動態 */
+a.tool-item:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--hover-shadow);
+  background-color: var(--color-gray-light);
+}
+
+a.tool-item:hover .tool-icon {
+  transform: scale(1.15);
+}
+
+a.tool-item:active {
+  transform: translateY(-2px);
+  box-shadow: var(--card-shadow);
+}
+
 /* Footer 頁尾：
    提供版權、附加資訊或網站收尾內容 */
 .footer {
-  background-color: var(--primary-color);
-  color: var(--color-gray-muted);
+  background-color: var(--footer-bg);
+  color: var(--footer-text);
   text-align: center;
   padding: 20px;
   font-size: 0.85rem;
@@ -442,7 +637,7 @@ img {
   display: inline-block;
   padding: 9px 18px;
   background-color: var(--primary-color);
-  color: var(--color-white);
+  color: var(--text-light);
   text-decoration: none;
   border-radius: 6px;
   font-weight: bold;
@@ -518,5 +713,5 @@ img {
 /* 標籤 hover 效果 */
 .tag-btn:hover {
   background-color: var(--secondary-color);
-  color: var(--color-white);
+  color: var(--text-light);
 }

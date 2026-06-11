@@ -35,14 +35,21 @@
          包含 Logo、主選單、國家分類下拉選單
          =================================================== -->
     <header class="navbar">
-      <!-- 網站品牌名稱 / Logo 區 -->
-      <div class="logo">🌍 亞洲旅遊指南</div>
+      <!-- 網站品牌名稱 / Logo 區，點擊可返回首頁 -->
+      <a href="index.html" class="logo">🌍 亞洲旅遊指南</a>
 
       <!-- 導覽列 -->
       <nav>
         <ul>
-          <!-- 目前所在頁面，使用 active 樣式標記 -->
-          <li><a href="#" class="active">首頁</a></li>
+          <!-- 台灣地區下拉選單 -->
+          <li class="dropdown">
+            <a href="#" class="dropbtn">台灣 ▼</a>
+            <ul class="dropdown-content">
+              <li><a href="#">台北篇 (準備中)</a></li>
+              <li><a href="#">台中篇 (準備中)</a></li>
+              <li><a href="#">台南篇 (準備中)</a></li>
+            </ul>
+          </li>
 
           <!-- 日本地區下拉選單 -->
           <li class="dropdown">
@@ -62,11 +69,15 @@
             <a href="#" class="dropbtn">中國 ▼</a>
             <ul class="dropdown-content">
               <li><a href="#">上海篇 (準備中)</a></li>
+              <li><a href="#">北京篇 (準備中)</a></li>
               <li><a href="#">雲南篇 (準備中)</a></li>
             </ul>
           </li>
+          <!-- 頁內錨點連結：導向熱門城市攻略區 -->
+          <li><a href="#destinations">熱門城市</a></li>
+
           <!-- 頁內錨點連結：導向旅遊工具介紹區 -->
-          <li><a href="#tools">旅遊工具</a></li>
+          <li><a href="#tools">實用工具</a></li>
 
           <li>
             <a href="javascript:void(0);" id="theme-toggle">深色模式</a>
@@ -103,8 +114,54 @@
       <!-- 區塊標題 -->
       <h2 class="section-title">熱門城市攻略</h2>
 
-      <!-- 城市卡片網格容器 -->
-      <div class="city-grid">
+      <!-- 城市卡片左右滾動包裝容器 -->
+      <div class="destinations-wrapper">
+        <button id="prev-btn" class="side-arrow left-arrow" aria-label="往左滾動">◀</button>
+
+        <!-- 城市卡片網格容器 -->
+        <div class="city-grid">
+        <!-- -------------------------------
+             台北卡片：尚未開放
+             ------------------------------- -->
+        <div class="city-card disabled">
+          <div class="city-badge coming-soon">即將上線</div>
+          <div class="city-info">
+            <h3>🏙️ 台北 Taipei</h3>
+            <p>
+              潮流與傳統文化交織的繁華首都。包含台北101景觀、士林夜市美食、華山文創特區，以及最完整的大台北捷運交通完全攻略！
+            </p>
+            <a href="#" class="btn-card disabled-btn">敬請期待</a>
+          </div>
+        </div>
+
+        <!-- -------------------------------
+             台中卡片：尚未開放
+             ------------------------------- -->
+        <div class="city-card disabled">
+          <div class="city-badge coming-soon">即將上線</div>
+          <div class="city-info">
+            <h3>🎨 台中 Taichung</h3>
+            <p>
+              充滿創意與藝術氣息的活力之城。包含逢甲夜市小吃、高美濕地日落、宮原眼科冰品，以及文青必訪的審計新村文創聚落！
+            </p>
+            <a href="#" class="btn-card disabled-btn">敬請期待</a>
+          </div>
+        </div>
+
+        <!-- -------------------------------
+             台南卡片：尚未開放
+             ------------------------------- -->
+        <div class="city-card disabled">
+          <div class="city-badge coming-soon">即將上線</div>
+          <div class="city-info">
+            <h3>🏛️ 台南 Tainan</h3>
+            <p>
+              歷史悠久的台灣古都與美食天堂。包含安平古堡、赤崁樓古蹟、國華街在地小吃，以及超浪漫的漁光島夕陽完全指南！
+            </p>
+            <a href="#" class="btn-card disabled-btn">敬請期待</a>
+          </div>
+        </div>
+
         <!-- -------------------------------
              東京卡片：已開放進入詳細頁
              ------------------------------- -->
@@ -126,7 +183,6 @@
 
         <!-- -------------------------------
              大阪卡片：尚未開放
-             使用 disabled 樣式表示為灰化狀態
              ------------------------------- -->
         <div class="city-card disabled">
           <div class="city-badge coming-soon">即將上線</div>
@@ -135,8 +191,6 @@
             <p>
               美食與笑聲不斷的活力之都。道頓堀章魚燒、心齋橋購物天堂、環球影城玩樂全指南，帶你體驗關西的熱情魅力！
             </p>
-
-            <!-- 尚未開放，因此按鈕不導向實際頁面 -->
             <a href="#" class="btn-card disabled-btn">敬請期待</a>
           </div>
         </div>
@@ -154,8 +208,52 @@
             <a href="#" class="btn-card disabled-btn">敬請期待</a>
           </div>
         </div>
+
+        <!-- -------------------------------
+             上海卡片：尚未開放
+             ------------------------------- -->
+        <div class="city-card disabled">
+          <div class="city-badge coming-soon">即將上線</div>
+          <div class="city-info">
+            <h3>🏙️ 上海 Shanghai</h3>
+            <p>
+              東方明珠與摩天大樓林立的繁華魔都。包含外灘萬國建築群夜景、城隍廟傳統小吃、迪士尼樂園，以及超便利的磁浮交通攻略！
+            </p>
+            <a href="#" class="btn-card disabled-btn">敬請期待</a>
+          </div>
+        </div>
+
+        <!-- -------------------------------
+             北京卡片：尚未開放
+             ------------------------------- -->
+        <div class="city-card disabled">
+          <div class="city-badge coming-soon">即將上線</div>
+          <div class="city-info">
+            <h3>🏯 北京 Beijing</h3>
+            <p>
+              歷史底蘊深厚的三千年帝王古都。包含萬里長城壯麗風光、故宮博物院尋秘、南鑼鼓巷創意街區，以及正宗北京烤鴨美食地圖！
+            </p>
+            <a href="#" class="btn-card disabled-btn">敬請期待</a>
+          </div>
+        </div>
+
+        <!-- -------------------------------
+             雲南卡片：尚未開放
+             ------------------------------- -->
+        <div class="city-card disabled">
+          <div class="city-badge coming-soon">即將上線</div>
+          <div class="city-info">
+            <h3>🏔️ 雲南 Yunnan</h3>
+            <p>
+              彩雲之南的自然美景與人文秘境。包含麗江古城漫步、玉龍雪山朝聖、雙廊洱海風光，帶您深入體驗少數民族的多元風情！
+            </p>
+            <a href="#" class="btn-card disabled-btn">敬請期待</a>
+          </div>
+        </div>
       </div>
-    </section>
+      <button id="next-btn" class="side-arrow right-arrow" aria-label="往右滾動">▶</button>
+    </div>
+  </section>
 
     <!-- ===================================================
          4. 互動工具介紹區
@@ -164,32 +262,27 @@
     <section id="tools" class="tools-overview">
       <div class="container">
         <!-- 區塊標題 -->
-        <h2>網站專屬互動工具</h2>
-
-        <!-- 區塊說明文字 -->
-        <p>
-          我們在各城市詳細攻略頁面中內建了貼心互動工具，幫你分擔繁瑣的行前準備：
-        </p>
+        <h2 class="section-title">實用線上工具</h2>
 
         <!-- 工具卡片網格 -->
         <div class="tools-grid">
           <!-- 工具 1：即時匯率換算 -->
-          <div class="tool-item">
+          <a href="page/exchange.html" class="tool-item">
             <span class="tool-icon">💵</span>
             <h4>即時匯率換算</h4>
             <p>
               攻略內建即時換算機，點選購物時能一秒換算台幣，買東西不再敲破計算機。
             </p>
-          </div>
+          </a>
 
           <!-- 工具 2：互動行前清單 -->
-          <div class="tool-item">
+          <a href="page/checklist.html" class="tool-item">
             <span class="tool-icon">✅</span>
             <h4>互動行前清單</h4>
             <p>
               護照、網卡、日幣換匯，提供線上打勾確認清單，打勾確認不怕漏掉任何東西。
             </p>
-          </div>
+          </a>
 
           <!-- 工具 3：旅遊動線規劃 -->
           <div class="tool-item">
@@ -210,5 +303,26 @@
         © 2026/10/23，去別人覺得無聊的地方看看吧。<br />將嚮往的遠方，變成走過的地方。
       </p>
     </footer>
+
+
+    <!-- 城市攻略左右滾動控制功能 -->
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        // 1. 城市攻略滾動控制
+        const prevBtn = document.getElementById("prev-btn");
+        const nextBtn = document.getElementById("next-btn");
+        const grid = document.querySelector(".city-grid");
+
+        if (prevBtn && nextBtn && grid) {
+          prevBtn.addEventListener("click", () => {
+            grid.scrollBy({ left: -grid.clientWidth, behavior: "smooth" });
+          });
+
+          nextBtn.addEventListener("click", () => {
+            grid.scrollBy({ left: grid.clientWidth, behavior: "smooth" });
+          });
+        }
+      });
+    </script>
   </body>
 </html>

@@ -3,151 +3,338 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>即時匯率轉換器</title>
+    <title>即時匯率轉換器 - 亞洲旅遊指南</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
     <style>
+      :root {
+        --primary-color: #1c3144;
+        --secondary-color: #d00000;
+        --bg-color: #faf6f0;
+        --card-bg: #ffffff;
+        --text-color: #2b2d42;
+        --text-muted: #8d99ae;
+        --border-color: #e2e8f0;
+        --accent-color: #e28743;
+        --card-shadow: 0 4px 15px rgba(28, 49, 68, 0.05);
+        --hover-shadow: 0 10px 25px rgba(28, 49, 68, 0.12);
+        --button-text: #ffffff;
+      }
+
+      [data-theme="dark"] {
+        --primary-color: #818cf8;
+        --secondary-color: #22d3ee;
+        --bg-color: #09090b;
+        --card-bg: #18181b;
+        --text-color: #fafafa;
+        --text-muted: #a1a1aa;
+        --border-color: #27272a;
+        --accent-color: #f472b6;
+        --card-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+        --hover-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+        --button-text: #ffffff;
+      }
+
       * {
         box-sizing: border-box;
         margin: 0;
         padding: 0;
-        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        font-family: "Noto Sans TC", sans-serif;
+        transition: background-color 0.3s, border-color 0.3s;
       }
 
       body {
-        background-color: #f4f7f6;
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        line-height: 1.6;
+        min-height: 100vh;
         display: flex;
+        flex-direction: column;
+      }
+
+      /* 頂部導覽 */
+      .navbar {
+        background-color: var(--navbar-bg, var(--primary-color));
+        color: #ffffff;
+        padding: 15px 5%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+      }
+
+      .navbar a.logo {
+        font-size: 1.25rem;
+        font-weight: bold;
+        color: #ffffff;
+        text-decoration: none;
+      }
+
+      .navbar-actions {
+        display: flex;
+        gap: 15px;
+        align-items: center;
+      }
+
+      .btn-nav {
+        color: rgba(255, 255, 255, 0.85);
+        text-decoration: none;
+        font-size: 0.95rem;
+        padding: 6px 12px;
+        border-radius: 4px;
+        transition: all 0.2s;
+        border: 1px dashed rgba(255, 255, 255, 0.3);
+      }
+
+      .btn-nav:hover {
+        color: #ffffff;
+        background-color: rgba(255, 255, 255, 0.15);
+        border-color: rgba(255, 255, 255, 0.6);
+      }
+
+      #theme-toggle {
+        background: transparent;
+        color: #ffffff;
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        padding: 6px 12px;
+        border-radius: 20px;
+        cursor: pointer;
+        font-size: 0.9rem;
+        transition: all 0.3s;
+      }
+
+      #theme-toggle:hover {
+        background-color: #ffffff;
+        color: var(--primary-color);
+      }
+
+      /* 主要內容 */
+      .container {
+        max-width: 600px;
+        margin: 40px auto;
+        padding: 0 20px;
+        flex-grow: 1;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
-        height: 100vh;
       }
 
+      header.page-header {
+        text-align: center;
+        margin-bottom: 30px;
+        width: 100%;
+      }
+
+      header.page-header h1 {
+        font-size: 2rem;
+        color: var(--primary-color);
+        margin-bottom: 10px;
+      }
+
+      header.page-header p {
+        color: var(--text-muted);
+        font-size: 1rem;
+      }
+
+      /* 轉換卡片 */
       .converter-card {
-        background: #ffffff;
+        background-color: var(--card-bg);
         padding: 30px;
         border-radius: 12px;
-        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+        box-shadow: var(--card-shadow);
         width: 100%;
-        max-width: 400px;
-        text-align: center;
+        border-top: 4px solid var(--primary-color);
+        transition: transform 0.3s, box-shadow 0.3s;
       }
 
-      h2 {
-        color: #333;
-        margin-bottom: 20px;
+      .converter-card:hover {
+        transform: translateY(-5px);
+        box-shadow: var(--hover-shadow);
       }
 
       .input-group {
-        margin-bottom: 15px;
+        margin-bottom: 20px;
         text-align: left;
       }
 
       label {
         display: block;
         font-size: 14px;
-        color: #666;
-        margin-bottom: 5px;
+        color: var(--text-color);
+        opacity: 0.85;
+        margin-bottom: 8px;
+        font-weight: 500;
       }
 
       input,
       select {
         width: 100%;
         padding: 12px;
-        border: 1px solid #ddd;
+        border: 1px solid var(--border-color);
+        background-color: rgba(120, 120, 120, 0.02);
+        color: var(--text-color);
         border-radius: 6px;
         font-size: 16px;
         outline: none;
-        transition: border-color 0.3s;
+        transition: all 0.3s;
       }
 
       input:focus,
       select:focus {
-        border-color: #007bff;
+        border-color: var(--primary-color);
+        background-color: var(--card-bg);
+        box-shadow: 0 0 0 3px rgba(129, 140, 248, 0.15);
       }
 
       .swap-text {
         font-size: 14px;
-        color: #888;
-        margin: 5px 0;
+        color: var(--text-muted);
+        margin: 10px 0;
+        text-align: center;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+      }
+
+      .swap-text::before,
+      .swap-text::after {
+        content: "";
+        flex-grow: 1;
+        height: 1px;
+        background-color: var(--border-color);
       }
 
       #convert-btn {
         width: 100%;
-        padding: 12px;
-        background-color: #007bff;
-        color: white;
+        padding: 14px;
+        background-color: var(--secondary-color);
+        color: var(--button-text);
         border: none;
         border-radius: 6px;
         font-size: 16px;
         cursor: pointer;
         font-weight: bold;
         margin-top: 10px;
-        transition: background 0.3s;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+        transition: all 0.3s ease;
       }
 
       #convert-btn:hover {
-        background-color: #0056b3;
+        background-color: var(--accent-color);
+        transform: translateY(-2px);
+      }
+
+      #convert-btn:active {
+        transform: translateY(0);
       }
 
       .result-box {
         margin-top: 25px;
-        padding: 15px;
-        background-color: #e9ecef;
+        padding: 20px;
+        background-color: rgba(120, 120, 120, 0.05);
         border-radius: 6px;
+        border: 1px solid var(--border-color);
+        text-align: center;
       }
 
       #result {
-        font-size: 20px;
+        font-size: 1.3rem;
         font-weight: bold;
-        color: #28a745;
+        color: var(--accent-color);
+        margin-bottom: 8px;
+        word-break: break-all;
       }
 
       #update-time {
         font-size: 12px;
-        color: #999;
-        margin-top: 5px;
+        color: var(--text-muted);
+      }
+
+      /* 頁尾 */
+      .footer {
+        background-color: var(--primary-color);
+        color: rgba(255, 255, 255, 0.7);
+        text-align: center;
+        padding: 20px;
+        font-size: 0.85rem;
+        margin-top: auto;
+        width: 100%;
       }
     </style>
   </head>
   <body>
-    <div class="converter-card">
-      <h2>即時匯率轉換</h2>
-
-      <div class="input-group">
-        <label for="amount">輸入金額</label>
-        <input type="number" id="amount" value="100" min="0" />
+    <!-- 頂部導覽 -->
+    <nav class="navbar">
+      <a href="../index.html" class="logo">🌍 亞洲旅遊指南</a>
+      <div class="navbar-actions">
+        <a href="../index.html" class="btn-nav">🏠 返回首頁</a>
+        <button id="theme-toggle">深色模式</button>
       </div>
+    </nav>
 
-      <div class="input-group">
-        <label for="from-currency">從（來源幣別）</label>
-        <select id="from-currency">
-          <option value="TWD" selected>TWD - 新台幣</option>
-          <option value="USD">USD - 美金</option>
-          <option value="JPY">JPY - 日圓</option>
-          <option value="EUR">EUR - 歐元</option>
-          <option value="KRW">KRW - 韓元</option>
-        </select>
-      </div>
+    <!-- 主要內容 -->
+    <div class="container">
+      <header class="page-header">
+        <h1>💵 即時匯率轉換器</h1>
+        <p>輸入您想兌換的金額與幣別，一鍵獲取最新的全球匯率數據！</p>
+      </header>
 
-      <div class="swap-text">轉換為</div>
+      <div class="converter-card">
+        <div class="input-group">
+          <label for="amount">輸入金額</label>
+          <input type="number" id="amount" value="100" min="0" />
+        </div>
 
-      <div class="input-group">
-        <label for="to-currency">到（目標幣別）</label>
-        <select id="to-currency">
-          <option value="TWD">TWD - 新台幣</option>
-          <option value="USD" selected>USD - 美金</option>
-          <option value="JPY">JPY - 日圓</option>
-          <option value="EUR">EUR - 歐元</option>
-          <option value="KRW">KRW - 韓元</option>
-        </select>
-      </div>
+        <div class="input-group">
+          <label for="from-currency">從（來源幣別）</label>
+          <select id="from-currency">
+            <option value="TWD" selected>TWD - 新台幣</option>
+            <option value="USD">USD - 美金</option>
+            <option value="JPY">JPY - 日圓</option>
+            <option value="EUR">EUR - 歐元</option>
+            <option value="KRW">KRW - 韓元</option>
+          </select>
+        </div>
 
-      <button id="convert-btn">立即轉換</button>
+        <div class="swap-text">轉換為</div>
 
-      <div class="result-box">
-        <div id="result">計算中...</div>
-        <div id="update-time">最後更新時間：--</div>
+        <div class="input-group">
+          <label for="to-currency">到（目標幣別）</label>
+          <select id="to-currency">
+            <option value="TWD">TWD - 新台幣</option>
+            <option value="USD" selected>USD - 美金</option>
+            <option value="JPY">JPY - 日圓</option>
+            <option value="EUR">EUR - 歐元</option>
+            <option value="KRW">KRW - 韓元</option>
+          </select>
+        </div>
+
+        <button id="convert-btn">立即轉換</button>
+
+        <div class="result-box">
+          <div id="result">計算中...</div>
+          <div id="update-time">最後更新時間：--</div>
+        </div>
       </div>
     </div>
 
+    <!-- 頁尾 -->
+    <footer class="footer">
+      <p>© 2026/10/23，亞洲旅遊指南。匯率資料採自公開 API，僅供旅遊參考。</p>
+    </footer>
+
+    <!-- 載入主題控制 JS -->
+    <script src="../assets/js/main.js"></script>
+
+    <!-- 清單互動 JS -->
     <script>
       // 1. 抓取 HTML 元素
       const amountInput = document.getElementById("amount");
