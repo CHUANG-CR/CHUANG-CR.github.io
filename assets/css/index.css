@@ -32,40 +32,6 @@
   --hover-shadow: 0 10px 25px rgba(28, 49, 68, 0.12);
 }
 
-/* ==========================================
-   2. 擴充主題 A：深色模式 (Dark Mode)
-   只要當 html 標籤被加上 data-theme="dark" 時就會自動啟用
-   ========================================== */
-[data-theme="dark"] {
-  --primary-color: #818cf8;
-  --secondary-color: #22d3ee;
-  --highlight-color: #f472b6;
-  --text-dark: #fafafa;
-  --text-light: #ffffff;
-  --text-muted: #a1a1aa;
-  --bg-light: #09090b;
-  
-  /* 基礎與輔助色彩 */
-  --color-white: #18181b;
-  --color-black: #fafafa;
-  --color-border: #27272a;
-  --color-disabled-border: #3f3f46;
-  --color-gray-light: #27272a;
-  --color-gray-muted: #71717a;
-  
-  /* 導覽列專用 */
-  --navbar-bg: #18181b;
-  --navbar-text: #ffffff;
-  --navbar-link: rgba(255, 255, 255, 0.7);
-  
-  /* 頁尾專用 */
-  --footer-bg: #18181b;
-  --footer-text: #ffffff;
-  
-  /* 陰影與效果 */
-  --card-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-  --hover-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
-}
 
 html {
   scroll-behavior: smooth;
@@ -116,6 +82,87 @@ img {
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
   overflow: visible !important; /* 允許下拉選單超出 navbar 顯示 */
 }
+
+/* 導覽列右側排版容器 */
+.navbar-container {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+.navbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+/* 🌦️ 即時天氣小工具 */
+.weather-widget {
+  display: none; /* 預設手機端隱藏 */
+  font-size: 0.85rem;
+  color: var(--navbar-text);
+  background-color: rgba(255, 255, 255, 0.12);
+  padding: 6px 14px;
+  border-radius: 20px;
+  align-items: center;
+  gap: 6px;
+  font-weight: 500;
+  transition: opacity 0.5s ease;
+  white-space: nowrap;
+}
+
+/* 🔎 永遠展開的搜尋欄 */
+.search-container {
+  display: none; /* 預設手機端隱藏 */
+  position: relative;
+  align-items: center;
+  border-radius: 20px;
+  overflow: hidden;
+  background-color: rgba(255, 255, 255, 0.12);
+  width: 170px; /* 永遠展開寬度 */
+  height: 36px;
+}
+
+.search-container:hover,
+.search-container:focus-within {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.search-container input {
+  width: 100%;
+  height: 100%;
+  padding: 0 10px 0 35px;
+  border: none;
+  background: transparent;
+  color: var(--navbar-text);
+  font-size: 0.85rem;
+  outline: none;
+}
+
+.search-container input::placeholder {
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.search-btn {
+  position: absolute;
+  left: 10px;
+  background: transparent;
+  border: none;
+  color: var(--navbar-text);
+  cursor: pointer;
+  font-size: 0.9rem;
+  pointer-events: none;
+}
+
+@media (min-width: 768px) {
+  .weather-widget {
+    display: flex;
+  }
+  .search-container {
+    display: flex;
+  }
+}
+
 
 /* 網站 Logo / 品牌名稱樣式 */
 .navbar .logo {

@@ -38,53 +38,61 @@
       <!-- 網站品牌名稱 / Logo 區，點擊可返回首頁 -->
       <a href="index.html" class="logo">🌍 亞洲旅遊指南</a>
 
-      <!-- 導覽列 -->
-      <nav>
-        <ul>
-          <!-- 台灣地區下拉選單 -->
-          <li class="dropdown">
-            <a href="#" class="dropbtn">台灣 ▼</a>
-            <ul class="dropdown-content">
-              <li><a href="#">台北篇 (準備中)</a></li>
-              <li><a href="#">台中篇 (準備中)</a></li>
-              <li><a href="#">台南篇 (準備中)</a></li>
-            </ul>
-          </li>
+      <div class="navbar-container">
+        <!-- 導覽列 -->
+        <nav>
+          <ul>
+            <!-- 台灣地區下拉選單 -->
+            <li class="dropdown">
+              <a href="#" class="dropbtn">台灣 ▼</a>
+              <ul class="dropdown-content">
+                <li><a href="#">台北篇 (準備中)</a></li>
+                <li><a href="#">台中篇 (準備中)</a></li>
+                <li><a href="#">台南篇 (準備中)</a></li>
+              </ul>
+            </li>
 
-          <!-- 日本地區下拉選單 -->
-          <li class="dropdown">
-            <!-- dropbtn 是主選單按鈕，點擊或 hover 可展開子選單 -->
-            <a href="#" class="dropbtn">日本 ▼</a>
+            <!-- 日本地區下拉選單 -->
+            <li class="dropdown">
+              <!-- dropbtn 是主選單按鈕，點擊或 hover 可展開子選單 -->
+              <a href="#" class="dropbtn">日本 ▼</a>
 
-            <!-- 第二層下拉選單 -->
-            <ul class="dropdown-content">
-              <li><a href="page/tokyo.html">東京篇</a></li>
-              <li><a href="#">大阪篇 (準備中)</a></li>
-              <li><a href="#">京都篇 (準備中)</a></li>
-            </ul>
-          </li>
+              <!-- 第二層下拉選單 -->
+              <ul class="dropdown-content">
+                <li><a href="page/tokyo.html">東京篇</a></li>
+                <li><a href="#">大阪篇 (準備中)</a></li>
+                <li><a href="#">京都篇 (準備中)</a></li>
+              </ul>
+            </li>
 
-          <!-- 中國地區下拉選單 -->
-          <li class="dropdown">
-            <a href="#" class="dropbtn">中國 ▼</a>
-            <ul class="dropdown-content">
-              <li><a href="#">上海篇 (準備中)</a></li>
-              <li><a href="#">北京篇 (準備中)</a></li>
-              <li><a href="#">雲南篇 (準備中)</a></li>
-            </ul>
-          </li>
-          <!-- 頁內錨點連結：導向熱門城市攻略區 -->
-          <li><a href="#destinations">熱門城市</a></li>
+            <!-- 中國地區下拉選單 -->
+            <li class="dropdown">
+              <a href="#" class="dropbtn">中國 ▼</a>
+              <ul class="dropdown-content">
+                <li><a href="#">上海篇 (準備中)</a></li>
+                <li><a href="#">北京篇 (準備中)</a></li>
+                <li><a href="#">雲南篇 (準備中)</a></li>
+              </ul>
+            </li>
+            <!-- 頁內錨點連結：導向熱門城市攻略區 -->
+            <li><a href="#destinations">熱門城市</a></li>
 
-          <!-- 頁內錨點連結：導向旅遊工具介紹區 -->
-          <li><a href="#tools">實用工具</a></li>
+            <!-- 頁內錨點連結：導向旅遊工具介紹區 -->
+            <li><a href="#tools">實用工具</a></li>
+          </ul>
+        </nav>
 
-          <li>
-            <a href="javascript:void(0);" id="theme-toggle">深色模式</a>
-            <script src="assets/js/main.js"></script>
-          </li>
-        </ul>
-      </nav>
+        <div class="navbar-actions">
+          <!-- 🌦️ 即時天氣資訊欄 -->
+          <div class="weather-widget" id="weather-widget" style="opacity: 0;"></div>
+
+          <!-- 🔎 搜尋欄位 -->
+          <div class="search-container">
+            <input type="text" placeholder="搜尋城市..." id="nav-search-input" />
+            <span class="search-btn">🔎</span>
+          </div>
+        </div>
+      </div>
     </header>
 
     <!-- ===================================================
@@ -123,7 +131,7 @@
         <!-- -------------------------------
              台北卡片：尚未開放
              ------------------------------- -->
-        <div class="city-card disabled">
+        <div class="city-card disabled" data-country="台灣 Taiwan">
           <div class="city-badge coming-soon">即將上線</div>
           <div class="city-info">
             <h3>🏙️ 台北 Taipei</h3>
@@ -137,7 +145,7 @@
         <!-- -------------------------------
              台中卡片：尚未開放
              ------------------------------- -->
-        <div class="city-card disabled">
+        <div class="city-card disabled" data-country="台灣 Taiwan">
           <div class="city-badge coming-soon">即將上線</div>
           <div class="city-info">
             <h3>🎨 台中 Taichung</h3>
@@ -151,7 +159,7 @@
         <!-- -------------------------------
              台南卡片：尚未開放
              ------------------------------- -->
-        <div class="city-card disabled">
+        <div class="city-card disabled" data-country="台灣 Taiwan">
           <div class="city-badge coming-soon">即將上線</div>
           <div class="city-info">
             <h3>🏛️ 台南 Tainan</h3>
@@ -165,7 +173,7 @@
         <!-- -------------------------------
              東京卡片：已開放進入詳細頁
              ------------------------------- -->
-        <div class="city-card">
+        <div class="city-card" data-country="日本 Japan">
           <!-- 卡片角落標籤 -->
           <div class="city-badge">熱門推薦</div>
 
@@ -184,7 +192,7 @@
         <!-- -------------------------------
              大阪卡片：尚未開放
              ------------------------------- -->
-        <div class="city-card disabled">
+        <div class="city-card disabled" data-country="日本 Japan">
           <div class="city-badge coming-soon">即將上線</div>
           <div class="city-info">
             <h3>🐙 大阪 Osaka</h3>
@@ -198,7 +206,7 @@
         <!-- -------------------------------
              京都卡片：尚未開放
              ------------------------------- -->
-        <div class="city-card disabled">
+        <div class="city-card disabled" data-country="日本 Japan">
           <div class="city-badge coming-soon">即將上線</div>
           <div class="city-info">
             <h3>⛩️ 京都 Kyoto</h3>
@@ -212,7 +220,7 @@
         <!-- -------------------------------
              上海卡片：尚未開放
              ------------------------------- -->
-        <div class="city-card disabled">
+        <div class="city-card disabled" data-country="中國 China">
           <div class="city-badge coming-soon">即將上線</div>
           <div class="city-info">
             <h3>🏙️ 上海 Shanghai</h3>
@@ -226,7 +234,7 @@
         <!-- -------------------------------
              北京卡片：尚未開放
              ------------------------------- -->
-        <div class="city-card disabled">
+        <div class="city-card disabled" data-country="中國 China">
           <div class="city-badge coming-soon">即將上線</div>
           <div class="city-info">
             <h3>🏯 北京 Beijing</h3>
@@ -240,7 +248,7 @@
         <!-- -------------------------------
              雲南卡片：尚未開放
              ------------------------------- -->
-        <div class="city-card disabled">
+        <div class="city-card disabled" data-country="中國 China">
           <div class="city-badge coming-soon">即將上線</div>
           <div class="city-info">
             <h3>🏔️ 雲南 Yunnan</h3>
@@ -303,7 +311,6 @@
         © 2026/10/23，去別人覺得無聊的地方看看吧。<br />將嚮往的遠方，變成走過的地方。
       </p>
     </footer>
-
-
+    <script src="assets/js/main.js"></script>
   </body>
 </html>
