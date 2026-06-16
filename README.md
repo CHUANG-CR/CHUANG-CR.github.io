@@ -5,8 +5,3 @@
 ### [東京篇](page/tokyo.html)
 ### [上海篇](page/shanghai.html)
 ---
-# 網站架構
-## 前端架構
-- HTML(骨架）
-- CSS(外觀)
-- Java Script(動作)
